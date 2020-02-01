@@ -34,7 +34,7 @@ const musicWindow = {
             this.win.show()
         })
         this.win.on('hide', _ => {
-            this.callback()
+            // this.callback()
         })
         this.win.on('closed', _ => {
 
