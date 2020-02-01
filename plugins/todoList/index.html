@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>待办事项</title>
+    <link rel="stylesheet" href="./index.css" type="text/css">
+  </head>
+  <body>
+    <div class="title-bar">
+      <img class="title-logo" src="./img/logo-64.png">
+      <span class="title-span">代办事项</span>
+      <!-- <img class="title-img" id="setting" title="设置" src="./img/setting.png"> -->
+      <img class="title-img" id="min" title="最小化" src="../../common/img/min.png">
+      <img class="title-img" id="max" title="最大化" src="../../common/img/max.png">
+      <img class="title-img hide" id="resize" title="还原" src="../../common/img/resize.png">
+      <img class="title-img" id="close" title="关闭" src="../../common/img/close.png">
+    </div>
+    <div class="container">
+      <div class="column-container"></div>
+    </div>
+    <div class="hide">
+      <div class="todo-column-div">
+        <div class="todo-column">
+          <div class="column">
+            <input type="text" placeholder="请输入分组名称" class="column-input hide">
+            <span class="column-span cursorAuto"></span>
+          </div>
+          <div class="group"></div>
+        </div>
+      </div>
+      <div class="item">
+        <input class="item-checkbox" type="checkbox">
+        <span class="item-span" contenteditable="false"></span>
+      </div>
+    </div>
+    <div class="setting-div"></div>
+    <div class="cover-div hide"></div>
+    <script>window.Sortable = require('../../common/js/Sortable.min.js')</script>
+    <script>require('./index.js')</script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+html {
+    height: 100%;
+}
+
+@font-face {
+    font-family: helveticaneue;
+    src: url('../../common/fonts/helveticaneue.ttf');
+}
+
+body {
+    margin: 0px;
+    height: 100%;
+    font-family: "helveticaneue";
+}
+
+.hide {
+    display: none !important;
+}
+
+.container {
+    width: 100%;
+    height: calc(100vh - 50px);
+}

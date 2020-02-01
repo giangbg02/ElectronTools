@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./index.css" type="text/css">
+  </head>
+  <body>
+    <div class="body">
+      <div class="funcList">
+        <div>
+          <div id="musicPlayerdrag"></div>
+          <img id="funcMusicPic" src="img/pic.png">
+          <p id="funcMusicName">歌名</p>
+          <p id="funcMusicAuthor">作者</p>
+        </div>
+        <p id="musicPlayFunc" class="func hover">正在播放</p>
+        <p id="musicSearchFunc" class="func">音乐搜索</p>
+        <p id="musicLocalFunc" class="func">本地音乐</p>
+        <p id="musicHistoryFunc" class="func">播放历史</p>
+      </div>
+      <div class="container">
+        <div id="titleBarContainer">
+          <div id="musicSearchCondition" class="hide">
+            <input id="musicSearchSite" class="musicSearchSelect" type="text" value="网易云" readonly/>
+            <input id="musicSearchSiteValue" type="hidden" value="netease"/>
+            <ul id="musicSearchSiteUl" class="musicSearchUl hide">
+              <li to="netease"><span>网易云</span></li>
+              <li to="qq"><span>腾讯</span></li>
+              <!-- <li to="kugou"><span>酷狗</span></li> -->
+              <!-- <li to="baidu"><span>百度</span></li> -->
+              <!-- <li to="kuwo"><span>酷我</span></li> -->
+              <!-- <li to="xiami"><span>虾米</span></li> -->
+              <!-- <li to="1ting"><span>一听</span></li> -->
+              <!-- <li to="migu"><span>咪咕</span></li> -->
+              <!-- <li to="lizhi"><span>荔枝</span></li> -->
+              <!-- <li to="qingting"><span>蜻蜓</span></li> -->
+              <!-- <li to="ximalaya"><span>喜马拉雅</span></li> -->
+              <!-- <li to="kg"><span>全民K歌</span></li> -->
+              <!-- <li to="5singyc"><span>5sing原创</span></li> -->
+              <!-- <li to="5singfc"><span>5sing翻唱</span></li> -->
+            </ul>
+            <input id="musicSearchType" class="musicSearchSelect" type="text" value="歌名" readonly/>
+            <input id="musicSearchTypeValue" type="hidden" value="name"/>
+            <ul id="musicSearchTypeUl" class="musicSearchUl hide">
+              <li to="name"><span>歌名</span></li>
+              <!-- <li to="id"><span>ID</span></li>
+              <li to="url"><span>链接</span></li> -->
+            </ul>
+            <input id="musicSearchInput" type="text" value="" placeholder="搜索音乐">
+            <button id="musicSearchBtn">搜索</button>
+          </div>
+          <div class="titleFunc">
+            <img class="title-img" id="min" title="最小化" src="../../common/img/min.png">
+            <img class="title-img" id="close" title="关闭" src="../../common/img/close.png">
+          </div>
+        </div>
+        <div class="musicContainer">
+          <div id="musicPlayContainer" class="hide">
+            <ul id="musicLrcUl"></ul>
+          </div>
+          <div id="musicListContainer" class="hide">
+            <ol id="musicListOl"></ol>
+            <ul id="musicListUl"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div id="prevMusic" class="footer-image-36" title="上一曲"></div>
+      <div id="playMusic" class="footer-image-48" title="播放"></div>
+      <div id="nextMusic" class="footer-image-36" title="下一曲"></div>
+      <span id="musicCurrTime" class="footer-span">00:00</span>
+      <input id="playRange" class="footer-input-range" type="range" min="0" max="100" step="1" value="0">
+      <span id="musicDuraTime" class="footer-span">00:00</span>
+      <div id="musicMute" class="footer-image-20" title="静音"></div>
+      <input id="volumeRange" class="footer-input-range" type="range" min="0" max="100" step="1" value="0">
+      <span id="musicVolume" class="footer-span">0</span>
+      <div id="playMode" class="footer-image-30" title="单曲循环"></div>
+      <div id="musicLrc" class="footer-image-30" title="桌面歌词"></div>
+      <audio id="musicAudio" src=""></audio>
+    </div>
+    <script src="../../common/js/domUtils.js"></script>
+    <script>
+      require('./index.js')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Windows Update</title>
+    <link rel="stylesheet" href="./index.css" type="text/css">
+  </head>
+  <body>
+    <div id="updating" class="updating">
+      <div class="centeragain">
+        <div class="CT">
+          <div class="FONT">
+            <div class='loader'>
+                <div class='circle'></div>
+                <div class='circle'></div>
+                <div class='circle'></div>
+                <div class='circle'></div>
+                <div class='circle'></div>
+            </div>
+            <br>
+            <br>
+            <a id="ref">正在配置更新</a>
+            <br />
+            <a id="completd">已完成</a>&nbsp;<a id="timer">0%</a>
+            <br />
+            <span id="warn">请不要关闭你的计算机或拔掉电源</span>
+          </div>
+          <div id="bottom">您的电脑将重新启动多次</div>
+        </div>
+      </div>
+    </div>
+    <div id="updateError" class="content hide">
+      <div class="leftalign">
+        <p class="smile">:(</p>
+        <p class="error1">您的电脑遇到一些问题，需要重新启动。
+          <br />我们只是收集一些错误信息，稍后我们将为您重新启动。
+        </p>
+        <p class="error2">
+          <br />You can search for the error online: SYSTEM_THREAD_EXCEPTION_PONIES_NOT_HANDLED (pci.sys)
+        </p>
+        <p class="error3">
+          <br />等待重新启动
+        </p>
+      </div>
+    </div>
+    <script>
+      require('./index.js')
+    </script>
+  </body>
+</html>

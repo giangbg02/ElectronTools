@@ -1,0 +1,567 @@
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0px;
+    height: 100%;
+    overflow: hidden;
+    /* background-color: #dedede; */
+}
+
+.hide {
+    display: none !important;
+}
+
+.body {
+    width: 100%;
+    height: 489px;
+    overflow: hidden;
+    cursor: default;
+    user-select: none;
+    border-bottom: 1px solid #00000020;
+}
+
+.funcList {
+    width: 200px;
+    height: 100%;
+    float: left;
+}
+
+#musicPlayerdrag {
+    width: 100%;
+    height: 50px;
+    -webkit-app-region: drag;
+}
+
+#funcMusicPic {
+    width: 150px;
+    height: 150px;
+    margin: 0px 25px 20px 25px;
+    border-radius: 50%;
+    -webkit-user-drag: none;
+}
+
+#funcMusicName {
+    margin: 10px;
+    text-align: center;
+    font-size: 18px;
+}
+
+#funcMusicAuthor {
+    margin: 10px 10px 30px 10px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.funcList .func {
+    margin: 0px;
+    background-image: url("img/play.png");
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    padding: 10px 0px 10px 60px;
+    background-position: 30px 10px;
+    height: 20px;
+    font-size: 14px;
+}
+
+#musicPlayFunc {
+    background-image: url("img/playing.png")
+}
+
+#musicPlayFunc.hover {
+    background-image: url("img/playing-hover.png")
+}
+
+#musicSearchFunc {
+    background-image: url("img/search.png")
+}
+
+#musicSearchFunc.hover {
+    background-image: url("img/search-hover.png")
+}
+
+#musicLocalFunc {
+    background-image: url("img/local.png")
+}
+
+#musicLocalFunc.hover {
+    background-image: url("img/local-hover.png")
+}
+
+#musicHistoryFunc {
+    background-image: url("img/history.png")
+}
+
+#musicHistoryFunc.hover {
+    background-image: url("img/history-hover.png")
+}
+
+.funcList .func:hover {
+    background-color: #73737326;
+}
+
+.container {
+    width: 649px;
+    height: 100%;
+    float: left;
+    border-left: 1px solid #00000020;
+}
+
+#titleBarContainer {
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #00000020;
+    -webkit-app-region: drag;
+}
+
+#musicSearchCondition {
+    height: 25px;
+    width: 350px;
+    display: inline-block;
+    position: relative;
+    left: 150px;
+    top: 26px;
+    -webkit-app-region: no-drag;
+}
+
+.musicSearchSelect {
+    height: 23px;
+    border: solid 1px #cdcdcd;
+    background: url(img/arrow.png) no-repeat;
+    background-size: 8px;
+    background-position: 65px 9px;
+    padding-left: 10px;
+    padding-right: 20px;
+    outline: none;
+    width: 50px;
+    cursor: pointer;
+    font-size: 12px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    user-select: none;
+}
+
+/* 下拉菜单文字不可选 加上user-select: none;无效   更改文字选择颜色为透明 */
+.musicSearchSelect::selection {
+    background: transparent;
+}
+
+#musicSearchSite {
+    border-top-left-radius: 5px;
+}
+
+#musicSearchType {
+    margin-left: -6px;
+}
+
+.musicSearchUl {
+    margin: 0px;
+    list-style: none;
+    width: 80px;
+    border: 1px solid #e4e7ed;
+    position: fixed;
+    left: 351px;
+    top: 50px;
+    z-index: 99;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    background-color: #fff;
+    padding-left: 0px;
+    height: 125px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 12px;
+    padding: 5px 0px;
+}
+
+.musicSearchUl li {
+    padding: 5px 10px;
+    text-align: center;
+}
+
+#musicSearchTypeUl {
+    left: 432px;
+    height: 78px;
+}
+
+#musicSearchInput {
+    height: 23px;
+    width: 116px;
+    padding: 0px 5px;
+    border: solid 1px #cdcdcd;
+    margin-left: -5px;
+    outline: none;
+    font-size: 12px;
+    background-color: #ffffff00;
+    vertical-align: top;
+}
+
+#musicSearchInput::selection {
+    background: #b7b7b7;
+}
+
+#musicSearchBtn {
+    width: 60px;
+    height: 25px;
+    background-color: #f5f7fa;
+    margin: 0px;
+    outline: none;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+    border: solid 1px #cdcdcd;
+    padding: 0px;
+    margin-left: -6px;
+    border-top-right-radius: 5px;
+}
+
+#musicSearchBtn:hover {
+    border: solid 1px #006dae;
+    background-color: #006dae;
+    color: #fff;
+}
+
+.titleFunc {
+    -webkit-app-region: no-drag;
+    height: 50px;
+    width: 105px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.title-img {
+    width: 22px;
+    padding: 14px;
+    -webkit-user-drag: none;
+}
+
+.title-img:hover {
+    background-color: #d0d0d0;
+}
+
+#close:hover {
+    background-color: #ff5252;
+}
+
+.musicContainer {
+    width: 100%;
+    height: 438px;
+}
+
+#musicPlayContainer {
+    width: 100%;
+    height: 100%;
+}
+
+#musicLrcUl {
+    margin: 0px;
+    width: 100%;
+    height: 38px;
+    overflow-y: auto;
+    padding: 200px 0px;
+    scroll-behavior: smooth;
+}
+
+#musicLrcUl.noPadding {
+    height: 438px;
+    padding: 0px;
+}
+
+#musicLrcUl li {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    width: 645px;
+}
+
+#musicLrcUl li.current {
+    height: 38px;
+    font-size: 22px;
+    text-align: center;
+    line-height: 38px;
+    background-color: #b7b7b7;
+    color: #FFFFFF;
+    letter-spacing: 2px;
+}
+
+#musicListContainer {
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+#musicListOl, #musicListUl {
+    padding-left: 0px;
+    margin: 0px;
+}
+
+#musicListContainer #musicListOl li {
+    padding: 10px;
+}
+
+#musicListUl {
+    width: 100%;
+    height: 398px;
+    border-top: solid 1px #cdcdcd;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+#musicListContainer li {
+    list-style: none;
+    padding: 8px 10px;
+    height: 20px;
+}
+
+#musicListUl li:hover {
+    background-color: #73737326;
+}
+
+#musicListContainer li * {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    margin-left: 13px;
+}
+
+#musicListContainer li .link {
+    width: 20px;
+    height: 20px;
+    background-image: url("img/link.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#musicListContainer li .link:hover {
+    background-image: url("img/link-hover.png");
+}
+
+#musicListContainer li .download {
+    width: 20px;
+    height: 20px;
+    background-image: url("img/download.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#musicListContainer li .download:hover {
+    background-image: url("img/download-hover.png");
+}
+
+#musicListContainer li .delete {
+    width: 20px;
+    height: 20px;
+    background-image: url("img/delete.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#musicListContainer li .delete:hover {
+    background-image: url("img/delete-hover.png");
+}
+
+.footer {
+    width: 100%;
+    height: 60px;
+    user-select: none;
+}
+
+.footer-image-48 {
+    display: inline-block;
+    background-size: contain;
+    width: 48px;
+    height: 48px;
+    margin: 6px 5px;
+}
+
+.footer-image-36 {
+    display: inline-block;
+    background-size: contain;
+    width: 36px;
+    height: 36px;
+    margin: 12px 5px;
+}
+
+.footer-image-30 {
+    display: inline-block;
+    background-size: contain;
+    width: 30px;
+    height: 30px;
+    margin: 15px 5px;
+}
+
+.footer-image-20 {
+    display: inline-block;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    margin: 20px 5px;
+}
+
+#prevMusic {
+    margin-left: 20px;
+    background-image: url("img/prev.png")
+}
+
+#prevMusic:hover {
+    background-image: url("img/prev-hover.png")
+}
+
+#playMusic {
+    background-image: url("img/play.png")
+}
+
+#playMusic:hover {
+    background-image: url("img/play-hover.png")
+}
+
+#playMusic.pause {
+    background-image: url("img/pause.png")
+}
+
+#playMusic.pause:hover {
+    background-image: url("img/pause-hover.png")
+}
+
+#nextMusic {
+    background-image: url("img/next.png")
+}
+
+#nextMusic:hover {
+    background-image: url("img/next-hover.png")
+}
+
+#musicMute {
+    background-image: url("img/volume.png")
+}
+
+#musicMute:hover {
+    background-image: url("img/volume-hover.png")
+}
+
+#musicMute.mute {
+    background-image: url("img/mute.png")
+}
+
+#musicMute.mute:hover {
+    background-image: url("img/mute-hover.png")
+}
+
+#playMode.list {
+    background-image: url("img/list-cycle.png")
+}
+
+#playMode.list:hover {
+    background-image: url("img/list-cycle-hover.png")
+}
+
+#playMode.random {
+    background-image: url("img/random-play.png")
+}
+
+#playMode.random:hover {
+    background-image: url("img/random-play-hover.png")
+}
+
+#playMode.single {
+    background-image: url("img/single-cycle.png")
+}
+
+#playMode.single:hover {
+    background-image: url("img/single-cycle-hover.png")
+}
+
+#musicLrc {
+    background-image: url("img/music-lrc.png")
+}
+
+#musicLrc:hover {
+    background-image: url("img/music-lrc-hover.png")
+}
+
+#musicLrc.hover {
+    background-image: url("img/music-lrc-hover.png")
+}
+
+.footer-span {
+    position: relative;
+    width: 40px;
+    top: -26px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+#musicCurrTime {
+    text-align: right;
+}
+
+#musicVolume {
+    width: 25px;
+}
+
+.footer-input-range {
+    outline: none;
+    top: -27px;
+    display: inline;
+    position: relative;
+    margin: 27px 2px;
+    -webkit-appearance: none;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#707070, #707070) no-repeat;
+    background-size: 0% 100%;
+    /* background-color: #d2d2d2; */
+}
+
+.footer-input-range::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 10px;
+    /* box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; */
+    box-shadow: 0 0.025em 0.025em #b1b1b1, inset 0 0.125em 0.125em #b1b1b1;
+}
+
+.footer-input-range::-webkit-slider-thumb {
+    margin-top: 0px;
+    /* box-shadow: 0 .125em .125em #3b4547; */ /*添加底部阴影*/
+    -webkit-appearance: none;
+    cursor: pointer;
+    background: #707070;
+    border-radius: 50%;
+    /* border: 3px solid #006eb3; */
+}
+
+.footer-input-range:hover::-webkit-slider-thumb {
+    height: 10px;
+    width: 10px;
+    margin-top: -2px;
+}
+
+#playRange {
+    width: 300px;
+}
+
+#volumeRange {
+    width: 100px;
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar
+{
+    width: 0px;
+}
+
+:hover::-webkit-scrollbar
+{
+    width: 4px;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+    background-color: #0000001a;
+    border-radius: 5px;
+}

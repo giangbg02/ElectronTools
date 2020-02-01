@@ -1,0 +1,42 @@
+html {
+    user-select: none; 
+    -webkit-user-select: none;
+    cursor: none;
+}
+body {
+    background-color: #1a85d7;
+    color: #fff;
+    margin: 80px;
+}
+@font-face {
+    font-family: days;
+    src: url('../../common/fonts/days.ttf');
+}
+.days{
+    font-family: days;
+    font-size: 30px;
+    font-weight: bold;
+}
+.youyuan{
+    font-family: YouYuan;
+    font-size: 30px;
+    font-weight: bold;
+}
+#one_word.days{
+    font-family: days;
+    font-size: 50px;
+    font-weight: lighter;
+    line-height: 85px;
+    margin: 25px 0;
+}
+#one_word.youyuan{
+    font-family: YouYuan;
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 85px;
+    margin: 25px 0;
+}
+
+#word_from {
+    text-align: right;
+}

@@ -1,0 +1,44 @@
+{
+  "name": "tools",
+  "version": "1.0.0",
+  "description": "ElectronTools",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64"
+  },
+  "author": "Steven Sun",
+  "license": "MIT",
+  "build": {
+    "productName": "ElectronTools",
+    "appId": "com.steven.app",
+    "copyright": "Copyright © year ${author}",
+    "compression": "store",
+    "directories": {
+      "output": "build"
+    },
+    "asar": false,
+    "win": {
+      "target": "portable",
+      "icon": "./common/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": false
+    }
+  },
+  "devDependencies": {
+    "electron": "^7.1.7",
+    "electron-builder": "^21.2.0",
+    "electron-packager": "^14.1.1"
+  },
+  "dependencies": {
+    "ffi-napi": "^2.4.6",
+    "nconf": "^0.10.0",
+    "request": "^2.88.0"
+  }
+}

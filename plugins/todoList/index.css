@@ -1,0 +1,287 @@
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0px;
+    height: 100%;
+}
+
+.hide {
+    display: none !important;
+}
+
+.ghost {
+    opacity: 0;
+}
+
+.cursorAuto {
+    cursor: default;
+}
+
+.delLine {
+    text-decoration: line-through;
+}
+
+.no-drag {
+    -webkit-app-region: no-drag;
+}
+
+.title-bar {
+    width: 100%;
+    height: 50px;
+    background-color: #e7eaed;
+    -webkit-app-region: drag;
+}
+
+.title-logo {
+    width: 32px;
+    margin: 9px;
+    -webkit-user-drag: none;
+}
+
+.title-span {
+    margin: 10px 0;
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: initial;
+    position: absolute;
+    cursor: default;
+    user-select: none;
+}
+
+.title-img {
+    width: 22px;
+    padding: 14px;
+    -webkit-app-region: no-drag;
+    -webkit-user-drag: none;
+}
+
+.title-img:hover {
+    background-color: #d0d0d0;
+}
+
+#close:hover {
+    background-color: #ff5252;
+}
+
+#setting {
+    position: fixed;
+    right: 150px;
+}
+
+#min {
+    position: fixed;
+    right: 100px;
+}
+
+#max {
+    position: fixed;
+    right: 50px;
+}
+
+#resize {
+    position: fixed;
+    right: 50px;
+}
+
+#close {
+    position: fixed;
+    right: 0px;
+}
+
+.container {
+    width: 100%;
+    height: calc(100vh - 50px);
+}
+
+.column-container {
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.todo-column-div {
+    width: 300px;
+    height: 100%;
+    padding: 5px 5px 10px 10px;
+    box-sizing: border-box;
+}
+
+.todo-column {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: #f3f4f6;
+    border-radius: 5px;
+    box-shadow: 5px 5px 3px 0px rgba(226,226,240,.7);
+}
+
+.column {
+    padding: 10px 12px 0 12px;
+    height: 40px;
+}
+
+.column-input {
+    border-width: 1px;
+    border-color: #92a7d6;
+    border-style: solid;
+    background-color: #f3f4f6;
+    font-size: 18px;
+    font-weight: initial;
+    padding: 7px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.column-input:focus {
+    outline:none;
+}
+
+.column-input::-webkit-input-placeholder {
+    color: #bfbfbf;
+}
+
+.column-span {
+    display: inline-block;
+    white-space: nowrap;
+    width: 100%;
+    height: 36px;
+    overflow: hidden!important;
+    text-overflow: ellipsis!important;
+    font-size: 18px;
+    line-height: 36px;
+    font-weight: initial;
+}
+
+.group {
+    padding: 0px 12px 0 12px;
+    height: calc(100% - 55px);
+    overflow-y: auto;
+}
+
+.item {
+    width: 100%;
+    box-sizing: border-box;
+    display: -webkit-box;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 12px;
+    box-shadow: 0px 0px 10px 2px rgba(189, 189, 189, 0.41);
+    margin: 8px 0;
+}
+
+.item-checkbox[type=checkbox]{
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    outline: none;
+    background: transparent;
+    border: 1px solid #d9d9d9;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin: 0 10px 0 0;
+}
+
+.item-checkbox[type=checkbox]::after{
+    content: '✔';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #6a85ca;
+    border: 1px solid #6a85ca;
+    color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 16px;
+    transition: all ease-in-out 300ms;
+    -webkit-transition: all ease-in-out 300ms;
+    -moz-transition: all ease-in-out 300ms;
+    opacity: 0;
+    margin: -1px;
+}
+
+.item-checkbox[type=checkbox]:checked::after{
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #6a85ca;
+    opacity: 1;
+}
+
+.item-span {
+    display: block;
+    width: 210px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: normal;
+    display: block;
+    white-space: pre-wrap;
+    overflow: hidden;
+    outline:none;
+    cursor: default;
+}
+
+.setting-div {
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    top: 50px;
+    right: -300px;
+    z-index: 1000;
+    background-color: #f3f4f6;
+    transition: all 0.3s cubic-bezier(0.91, 0.21, 0.74, 0.51);
+}
+
+.setting-div-open {
+    right: 0px;
+}
+
+.cover-div {
+    width: 100%;
+    height: calc(100% - 50px);
+    position: fixed;
+    top: 50px;
+    background-color: #35353559;
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+.group::-webkit-scrollbar
+{
+    width: 0px;
+}
+
+.group:hover::-webkit-scrollbar
+{
+    width: 4px;
+}
+
+/*定义滑块 内阴影+圆角*/
+.group::-webkit-scrollbar-thumb
+{
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+.column-container::-webkit-scrollbar
+{
+    height: 0px;
+}
+
+.column-container:hover::-webkit-scrollbar
+{
+    height: 30px;
+}
+
+/*定义滑块 内阴影+圆角*/
+.column-container::-webkit-scrollbar-thumb
+{
+    background-color: #e7eaed;
+    border-radius: 5px;
+}

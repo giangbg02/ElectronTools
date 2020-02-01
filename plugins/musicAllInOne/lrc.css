@@ -1,0 +1,27 @@
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0px;
+    height: 100%;
+    overflow: hidden;
+    -webkit-app-region: drag;
+    /* background-color: #dedede; */
+}
+
+#lrcSpan {
+    width: 1200px;
+    height: 100px;
+    display: inline-block;
+    font-size: 35px;
+    text-align: center;
+    line-height: 100px;
+    /* -webkit-text-stroke: 0.5px #FFF; */
+    color: #24abf2;
+    user-select: none;
+}
+
+#lrcSpan.move {
+    background-color: #8c8c8c3b;
+}

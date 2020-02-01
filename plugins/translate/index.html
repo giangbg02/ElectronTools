@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>translate</title>
+    <link rel="stylesheet" href="./index.css" type="text/css">
+    <script src="./md5.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="con-top">
+        <textarea class="textarea" id="queryText" placeholder="请输入要翻译的内容"></textarea>
+        <div class="funcArea">
+          <input id="queryLangName" class="language" type="text" value="自动检测" readonly/>
+          <input id="queryLangValue" type="hidden" value=""/>
+          <button id="queryCopy" class="copy">复制</button>
+          <button id="queryTTS" class="tts"></button>
+        </div>
+      </div>
+      <div class="con-bottom">
+        <textarea class="textarea" id="transText" placeholder="翻译结果" readonly></textarea>
+        <div class="funcArea">
+          <input id="transLangName" class="language" type="text" value="自动检测" readonly/>
+          <input id="transLangValue" type="hidden" value=""/>
+          <button id="transCopy" class="copy">复制</button>
+          <button id="transTTS" class="tts"></button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <audio src="" id="sound"></audio>
+      <ul id="selectUl" class="ul hide">
+        <li to=""><span>自动检测</span></li>
+        <li to="zh"><span>中文</span></li>
+        <li to="en"><span>英语</span></li>
+        <li to="yue"><span>粤语</span></li>
+        <li to="wyw"><span>文言文</span></li>
+        <li to="jp"><span>日语</span></li>
+        <li to="kor"><span>韩语</span></li>
+        <li to="fra"><span>法语</span></li>
+        <li to="spa"><span>西班牙语</span></li>
+        <li to="th"><span>泰语</span></li>
+        <li to="ara"><span>阿拉伯语</span></li>
+        <li to="ru"><span>俄语</span></li>
+        <li to="pt"><span>葡萄牙语</span></li>
+        <li to="de"><span>德语</span></li>
+        <li to="it"><span>意大利语</span></li>
+        <li to="el"><span>希腊语</span></li>
+        <li to="nl"><span>荷兰语</span></li>
+        <li to="pl"><span>波兰语</span></li>
+        <li to="bul"><span>保加利亚语</span></li>
+        <li to="est"><span>爱沙尼亚语</span></li>
+        <li to="dan"><span>丹麦语</span></li>
+        <li to="fin"><span>芬兰语</span></li>
+        <li to="cs"><span>捷克语</span></li>
+        <li to="rom"><span>罗马尼亚语</span></li>
+        <li to="slo"><span>斯洛文尼亚语</span></li>
+        <li to="swe"><span>瑞典语</span></li>
+        <li to="hu"><span>匈牙利语</span></li>
+        <li to="cht"><span>繁体中文</span></li>
+        <li to="vie"><span>越南语</span></li>
+      </ul>
+    </div>
+    <div class="dialog hide"></div>
+    <script>
+      require('./index.js')
+    </script>
+  </body>
+</html>
