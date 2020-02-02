@@ -343,7 +343,7 @@ for(var i=0;i<musicSearchTypeLiList.length;i++){
 
 //输入框回车
 ID("musicSearchInput").onkeydown = function(e) {
-    if(e.keyCode == keyCode.enter) {
+    if(e.keyCode == keyCode.Enter) {
         ID("musicSearchBtn").click()
     }
 }

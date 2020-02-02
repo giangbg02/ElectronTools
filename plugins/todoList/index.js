@@ -87,7 +87,7 @@ function addColumnFunc(index, node) {
 
     input.onblur = input.onkeydown = function(evt){
         let spanVal = span.innerText
-        if(evt.type == "blur" || evt.keyCode == 13) {
+        if(evt.type == "blur" || evt.keyCode == keyCode.Enter) {
             if(input.value == ""){
                 if(spanVal == ""){
                     input.parentElement.parentElement.parentElement.remove()
@@ -105,7 +105,7 @@ function addColumnFunc(index, node) {
                 }
             }
             toggleColumnInputSpan(input, span)
-        }else if(evt.keyCode == 27) {
+        }else if(evt.keyCode == keyCode.Escape) {
             if(spanVal == ""){
                 input.onblur = null
                 this.parentElement.parentElement.parentElement.remove()
@@ -207,7 +207,7 @@ function addItemFunc(group, itemData, position, node) {
     span.onblur = span.onkeydown = function(evt){
         let spanText = this.innerText
         let spanVal = this.value
-        if(evt.type == "blur" || evt.keyCode == 13) {
+        if(evt.type == "blur" || evt.keyCode == keyCode.Enter) {
             if(spanText == ""){
                 if(spanVal == ""){
                     this.parentElement.remove()
@@ -226,7 +226,7 @@ function addItemFunc(group, itemData, position, node) {
                 }
             }
             span.contentEditable = false
-        }else if(evt.keyCode == 27) {
+        }else if(evt.keyCode == keyCode.Escape) {
             if(spanVal == ""){
                 this.onblur = null
                 this.parentElement.remove()

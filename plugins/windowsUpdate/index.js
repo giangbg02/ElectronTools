@@ -73,10 +73,10 @@ document.addEventListener('click', function(){
     }
 })
 document.addEventListener('keyup', function(e){
-    if(e.keyCode == 13 && updateError){
+    if(e.keyCode == keyCode.Enter && updateError){
         updateError = null
         changeToUpdateErrorPage()
-    }else if(e.keyCode == 27 && (updateSuccess || (updateError == null))){
+    }else if(e.keyCode == keyCode.Escape && (updateSuccess || (updateError == null))){
         remote.getCurrentWindow().hide()
     }
 })

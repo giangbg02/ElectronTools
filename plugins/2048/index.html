@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>template</title>
+  <link rel="stylesheet" href="./index.css" type="text/css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="heading">
+      <div class="scores-container">
+        <div id="score" class="score-container">100</div>
+        <div id="best" class="score-container">100</div>
+        <div class="score-addition">+16</div>
+      </div>
+    </div>
+
+    <div class="game-container">
+      <div class="game-message">
+        <p></p>
+        <div class="lower">
+          <a class="keep-playing-button">Keep playing</a>
+          <a class="retry-button">Try again</a>
+          <div class="score-sharing">
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+      </div>
+
+      <div id="tiles" class="tile-container"></div>
+    </div>
+
+  </div>
+  <script src="../../common/js/domUtils.js"></script>
+  <script>
+    require('./index.js')
+  </script>
+</body>
+
+</html>

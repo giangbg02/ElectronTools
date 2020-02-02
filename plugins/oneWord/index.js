@@ -48,7 +48,7 @@ ipcRenderer.on("readyChange", (event, arg) => {
 })
 
 document.addEventListener('keyup', function(e){
-    if(e.keyCode == 27){
+    if(e.keyCode == keyCode.Escape){
         ipcRenderer.send("oneWordRefresh")
     }
 })

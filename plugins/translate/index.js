@@ -7,14 +7,14 @@ var transText = document.getElementById('transText');
 var isTransing = false;
 
 document.addEventListener('keydown', e => {
-    if(e.keyCode == 27) {
+    if(e.keyCode == keyCode.Escape) {
         remote.getCurrentWindow().hide()
     }
 })
 
 //翻译区域回车
 queryText.addEventListener('keydown', e => {
-    if(e.keyCode == 13) {
+    if(e.keyCode == keyCode.Enter) {
         if(isTransing) {
             //正在翻译
         }else {
