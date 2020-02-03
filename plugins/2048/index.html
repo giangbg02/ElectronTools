@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>template</title>
+  <title>2048</title>
   <link rel="stylesheet" href="./index.css" type="text/css">
 </head>
 
@@ -11,20 +11,21 @@
   <div class="container">
     <div class="heading">
       <div class="scores-container">
-        <div id="score" class="score-container">100</div>
-        <div id="best" class="score-container">100</div>
-        <div class="score-addition">+16</div>
+        <div id="score" class="score-container">0</div>
+        <div id="best" class="score-container">0</div>
+        <div id="moveScore" class="score-addition hide"></div>
+      </div>
+      <div class="titleFunc">
+        <img class="title-img" id="close" title="关闭" src="../../common/img/close.png">
       </div>
     </div>
 
     <div class="game-container">
-      <div class="game-message">
-        <p></p>
+      <div id="message" class="game-message hide">
+        <p>无路可走</p>
         <div class="lower">
-          <a class="keep-playing-button">Keep playing</a>
-          <a class="retry-button">Try again</a>
-          <div class="score-sharing">
-          </div>
+          <div id="replay" class="keep-playing-button">再来一局</div>
+          <div id="quit" class="retry-button">退出</div>
         </div>
       </div>
 

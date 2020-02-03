@@ -27,7 +27,7 @@ const mainWindow = {
             slashes: true
         }))
         this.win.once('ready-to-show', () => {
-            this.win.webContents.openDevTools()
+            // this.win.webContents.openDevTools()
             this.win.show()
         })
         this.win.on('hide', _ => {
