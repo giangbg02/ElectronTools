@@ -15,6 +15,12 @@ function hide(id) {
     node.classList.add("hide")
 }
 
+// 显示 / 隐藏节点
+function toggle(id, className) {
+    let node = typeof id == "string" ? ID(id) : id
+    node.classList.toggle(className ? className : "hide")
+}
+
 //添加向节点末尾添加HTML
 function appendHTML(node, html, clickCallback) {
     let temp = document.createElement("div")
@@ -24,6 +30,11 @@ function appendHTML(node, html, clickCallback) {
         targetNode.onclick = clickCallback
     }
     node.appendChild(targetNode)
+}
+
+// 当前节点的兄弟节点
+function siblings(node, callback) {
+    node.parentElement.childNodes.forEach(callback)
 }
 
 //数字补位 一位数变两位数
