@@ -105,3 +105,6 @@ dist
 
 # electron-builder
 build
+
+# yarn lock
+yarn.lock

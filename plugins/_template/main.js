@@ -4,6 +4,8 @@ const path = require('path')
 
 const config = require('../../common/js/config').file('plugins/_template');
 
+const cancelTitleBarMenu = require('../../common/js/cancelTitleBarMenu')
+
 const mainWindow = {
     creat: function(){
         this.win = new BrowserWindow({
@@ -30,6 +32,7 @@ const mainWindow = {
         }))
         this.win.once('ready-to-show', () => {
             this.win.webContents.openDevTools()
+            cancelTitleBarMenu(this.win)
             this.win.show()
         })
         this.win.on('hide', _ => {
