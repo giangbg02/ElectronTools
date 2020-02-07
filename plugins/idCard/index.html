@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>身份证号码生成</title>
+  <link rel="stylesheet" href="./index.css" type="text/css">
+</head>
+
+<body>
+  <div class="titleBarContainer">
+    <img class="title-logo" src="./img/logo-64.png">
+    <span class="title-span">template</span>
+    <div class="titleFunc">
+      <img class="title-img" id="setting" title="设置" src="../../common/img/setting.png">
+      <img class="title-img" id="min" title="最小化" src="../../common/img/min.png">
+      <img class="title-img" id="close" title="关闭" src="../../common/img/close.png">
+    </div>
+  </div>
+  <div class="container">
+    <label id="birthPlace" tabindex="0">请选择出生地</label>
+    <div class="birthPopper hide" id="birthSelect" tabindex="0">
+      <div class="birthPanel">
+        <div class="birthMenu">
+          <ul class="birthUl" id="provinceUl"></ul>
+        </div>
+        <div class="birthMenu hide">
+          <ul class="birthUl" id="cityUl"></ul>
+        </div>
+        <div class="birthMenu hide">
+          <ul class="birthUl" id="countyUl"></ul>
+        </div>
+      </div>
+    </div>
+    <label id="birthDay" tabindex="0">出生年月</label>
+    <div class="sexTitle">性别</div>
+    <div class="sex">
+      <select id="sex">
+        <option value="1">男</option>
+        <option value="0">女</option>
+      </select>
+    </div><button id="creat">生成</button>
+    <div class="creater" id="creater"></div>
+  </div>
+  <script src="../../common/js/domUtils.js"></script>
+  <script>
+    require('./index.js')
+  </script>
+</body>
+
+</html>
