@@ -33,8 +33,7 @@
   },
   "devDependencies": {
     "electron": "^7.1.7",
-    "electron-builder": "^21.2.0",
-    "electron-packager": "^14.1.1"
+    "electron-builder": "^21.2.0"
   },
   "dependencies": {
     "ffi-napi": "^2.4.6",
