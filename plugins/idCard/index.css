@@ -65,7 +65,7 @@ body {
     font-size: 14px;
 }
 
-#birthPlace {
+.labelButton {
     -webkit-appearance: none;
     background-color: #fff;
     background-image: none;
@@ -74,32 +74,33 @@ body {
     box-sizing: border-box;
     color: #606266;
     display: inline-block;
-    font-size: inherit;
+    font-size: 14px;
     height: 36px;
     line-height: 36px;
     outline: none;
     padding: 0 15px;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    width: 550px;
     margin-top: 10px;
     margin-left: 25px;
     cursor: pointer;
     user-select: none;
 }
 
-#birthPlace.hover {
+.labelButton.hover {
     border-color: #409eff;
 }
 
-#birthPlace.error {
+.labelButton.error {
     border-color: #F56C6C;
+}
+
+#birthPlace {
+    width: 550px;
 }
 
 .birthPopper {
     position: absolute;
     top: 96px;
     left: 24px;
-    z-index: 2087;
     background-color: #FFF;
     border: 1px solid #e4e7ed;
     border-radius: 4px;
@@ -172,6 +173,130 @@ body {
     font-family: serif;
     font-weight: bold;
 }
+
+#birthDay {
+    width: 550px;
+}
+
+.datePicker {
+    position: absolute;
+    top: 142px;
+    left: 24px;
+    color: #606266;
+    border: 1px solid #e4e7ed;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    background: #fff;
+    border-radius: 4px;
+    line-height: 30px;
+    width: 322px;
+    outline: none;
+}
+
+.pickerHeader {
+    margin: 12px;
+    text-align: center;
+}
+
+.pickerHeader button {
+    font-size: 12px;
+    color: #303133;
+    border: 0;
+    background: #0000;
+    cursor: pointer;
+    outline: none;
+    margin-top: 7px;
+    font-family: serif;
+}
+
+.pickerHeader .prevButton {
+    float: left;
+}
+
+.pickerHeader .nextButton {
+    float: right;
+}
+
+#prevMonth {
+    margin-left: 10px;
+}
+
+#nextMonth {
+    margin-right: 10px;
+}
+
+.pickerHeader span {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0 5px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    color: #606266;
+}
+
+.pickerContent {
+    position: relative;
+    margin: 15px;
+}
+
+.pickerContent table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+#dateTable {
+    font-size: 12px;
+    user-select: none;
+}
+
+#dateTable th {
+    padding: 5px;
+    color: #606266;
+    font-weight: 400;
+    border-bottom: 1px solid #ebeef5;
+}
+
+#dateTable td {
+    width: 32px;
+    height: 30px;
+    padding: 4px 0;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+#dateTable td.empty {
+    cursor: default;
+}
+
+#dateTable td:hover, td.hover {
+    color: #409eff;
+}
+
+#dateTable td div {
+    height: 30px;
+    padding: 3px 0;
+    box-sizing: border-box;
+}
+
+#dateTable td div span {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: 0 auto;
+    line-height: 24px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+}
+
+#dateTable td.current div span {
+    color: #fff;
+    background-color: #409eff;
+}
+
 
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/

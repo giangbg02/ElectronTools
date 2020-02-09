@@ -10,7 +10,9 @@ let cityJsonData = config.get("city")
 
 // 出生地选择框 点击
 ID("birthPlace").onclick = function() {
-    toggle("birthSelect")
+    let birthSelect = ID("birthSelect")
+    isShow(birthSelect) ? hide(birthSelect) : hide(birthSelect)
+    isShow(birthSelect) ? hide(birthSelect) : hide(birthSelect)
     ID("birthPlace").classList.add("hover")
 }
 
@@ -111,8 +113,31 @@ function getLiHTML(code, value, hasI) {
             + "</li>"
 }
 
-// 初始化省 ul
-buildProvinceUl()
+/**
+ * 出生年月日 日期选择 日历
+ */
+
+// 出生年月日选择框 点击
+ID("birthDay").onclick = function() {
+    toggle("birthPicker")
+    ID("birthDay").classList.add("hover")
+}
+
+// 失去焦点时 判断当前获得焦点的节点
+ID("birthDay").onblur = ID("birthPicker").onblur = function() {
+    setTimeout(_ => {
+        if(document.activeElement.id == "birthDay" || document.activeElement.id == "birthPicker") {
+            return
+        }else {
+            hide("birthPicker")
+            ID("birthDay").classList.remove("hover")
+        }
+    }, 50)
+}
+
+/**
+ * 生成
+ */
 
 // 点击生成
 ID("creat").onclick = function() {
@@ -202,6 +227,13 @@ ID("creat").onclick = function() {
     }
 
 }
+
+/**
+ * 页面初始化
+ */
+
+// 初始化省 ul
+buildProvinceUl()
 
 /**
  * 标题栏按钮
