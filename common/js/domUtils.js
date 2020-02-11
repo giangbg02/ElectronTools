@@ -107,6 +107,18 @@ $.numFill = function(number, length = 2, fill = "0") {
     return (Array(length).join(fill) + number).slice(-length)
 }
 
+//随机整数
+$.random = function(min, max) {
+    switch (arguments.length) {
+        case 1:
+            return Math.floor(Math.random() * min)
+        case 2:
+            return Math.floor(Math.random() * (max - min)) + min
+        default:
+            return Math.random();
+    }
+}
+
 //键盘代码
 $.keyCode = {
     "BackSpace"     : 8,
