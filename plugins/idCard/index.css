@@ -5,6 +5,7 @@ html {
 body {
     margin: 0px;
     height: 100%;
+    user-select: none;
 }
 
 .hide {
@@ -353,6 +354,10 @@ body {
 
 .creater tbody tr:nth-child(odd){
     background: #f5f7fa;
+}
+
+#creater {
+    user-select: text;
 }
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/

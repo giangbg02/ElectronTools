@@ -1,113 +1,164 @@
 const {remote, ipcRenderer} = require('electron')
 
+const $ = require('../../common/js/domUtils')
+
 const config = require('../../common/js/config').file('plugins/idCard');
 
 let cityJsonData = config.get("city")
+let nameJsonData = config.get("name")
+let configJsonData = config.get("config")
+
+function syncConfig() {
+    config.set("config", configJsonData)
+}
 
 /**
  * 出生地
  */
 
 // 出生地选择框 点击
-ID("birthPlace").onclick = function() {
-    let birthSelect = ID("birthSelect")
-    isShow(birthSelect) ? hide(birthSelect) : hide(birthSelect)
-    isShow(birthSelect) ? hide(birthSelect) : hide(birthSelect)
-    ID("birthPlace").classList.add("hover")
-}
+$("birthPlace").click(_ => {
+    let birthSelect = $("birthSelect")
+    birthSelect.isShow() ? hideBirthSelect() : (birthSelect.show(),$("birthPlace").addClass("hover"))
+})
 
 // 失去焦点时 判断当前获得焦点的节点
-ID("birthPlace").onblur = ID("birthSelect").onblur = function() {
+$("birthPlace").blur(selectClick)
+$("birthSelect").blur(selectClick) 
+
+function selectClick() {
     setTimeout(_ => {
         if(document.activeElement.id == "birthPlace" || document.activeElement.id == "birthSelect") {
             return
         }else {
-            hide("birthSelect")
-            ID("birthPlace").classList.remove("hover")
-            if(ID("birthPlace").getAttribute("countyCode")) {
-                ID("birthPlace").classList.remove("error")
-            }else {
-                ID("birthPlace").classList.add("error")
-            }
+            hideBirthSelect()
         }
     }, 50)
 }
 
+//隐藏 出生地选择
+function hideBirthSelect() {
+    $("birthSelect").hide()
+    let birthPlace = $("birthPlace")
+    birthPlace.removeClass("hover")
+    if(birthPlace.attr("countyCode")) {
+        birthPlace.removeClass("error")
+    }else {
+        birthPlace.addClass("error")
+    }
+}
+
 // 构建省信息
 function buildProvinceUl() {
-    let provinceUl = ID("provinceUl")
+    let birthPlace = $("birthPlace")
+    let birthPlaceBack = configJsonData.birthPlace
+
+    birthPlace.attr("provinceindex", birthPlaceBack.provinceindex)
+    birthPlace.attr("provincecode", birthPlaceBack.provincecode)
+    birthPlace.attr("provincename", birthPlaceBack.provincename)
+    birthPlace.attr("cityindex", birthPlaceBack.cityindex)
+    birthPlace.attr("citycode", birthPlaceBack.citycode)
+    birthPlace.attr("cityname", birthPlaceBack.cityname)
+    birthPlace.attr("countyindex", birthPlaceBack.countyindex)
+    birthPlace.attr("countycode", birthPlaceBack.countycode)
+    birthPlace.attr("countyname", birthPlaceBack.countyname)
+    birthPlace.text(birthPlaceBack.text)
+
+    buildCountyUl()
+    buildCityUl()
+
+    let provinceUl = $("provinceUl")
     cityJsonData.forEach((province, index) => {
-        appendHTML(provinceUl, getLiHTML(province.c, province.v, true), function() {
-            if(this.getAttribute("c") == ID("birthPlace").getAttribute("provinceCode")) return
-            siblings(this, node => {
-                node.classList.remove("hover")
+        provinceUl.append(getLiHTML(province.c, province.v, true, province.c == birthPlaceBack.provincecode), function() {
+            let li = $(this)
+            if(li.attr("c") == birthPlace.attr("provinceCode")) return
+            li.siblings.forEach(node => {
+                $(node).removeClass("hover")
             })
-            this.classList.add("hover")
-            ID("birthPlace").setAttribute("countyCode", "")
-            ID("birthPlace").setAttribute("cityCode", "")
-            ID("countyUl").innerHTML = ""
-            ID("cityUl").innerHTML = ""
-            hide(ID("countyUl").parentElement)
-            ID("birthPlace").setAttribute("provinceIndex", index)
-            ID("birthPlace").setAttribute("provinceCode", this.getAttribute("c"))
-            ID("birthPlace").setAttribute("provinceName", this.getAttribute("v"))
+            li.addClass("hover")
+            $("countyUl").html("").parent().hide()
+            $("cityUl").html("")
+
+            birthPlace.attr("countyCode", "")
+                        .attr("cityCode", "")
+                        .attr("provinceIndex", index)
+                        .attr("provinceCode", li.attr("c"))
+                        .attr("provinceName", li.attr("v"))
             buildCityUl()
-            show(ID("cityUl").parentElement)
-            ID("birthPlace").innerText = this.getAttribute("v")
+            birthPlace.text(li.attr("v"))
         })
     })
 }
 
 // 构建市信息
 function buildCityUl() {
-    let provinceIndex = ID("birthPlace").getAttribute("provinceIndex")
+    let birthPlace = $("birthPlace")
+    let provinceIndex = birthPlace.attr("provinceIndex")
     let cities = cityJsonData[provinceIndex].l
-    let cityUl = ID("cityUl")
+    let cityUl = $("cityUl")
     cities.forEach((city, index) => {
-        appendHTML(cityUl, getLiHTML(city.c, city.v, true), function() {
-            if(this.getAttribute("c") == ID("birthPlace").getAttribute("cityCode")) return
-            siblings(this, node => {
-                node.classList.remove("hover")
+        cityUl.append(getLiHTML(city.c, city.v, true, city.c == birthPlace.attr("citycode")), function() {
+            let li = $(this)
+            if(li.attr("c") == birthPlace.attr("cityCode")) return
+            li.siblings.forEach(node => {
+                $(node).removeClass("hover")
             })
-            this.classList.add("hover")
-            ID("birthPlace").setAttribute("countyCode", "")
-            ID("countyUl").innerHTML = ""
-            ID("birthPlace").setAttribute("cityIndex", index)
-            ID("birthPlace").setAttribute("cityCode", this.getAttribute("c"))
-            ID("birthPlace").setAttribute("cityName", this.getAttribute("v"))
+            li.addClass("hover")
+            $("countyUl").html("")
+            birthPlace.attr("countyCode", "")
+                        .attr("cityIndex", index)
+                        .attr("cityCode", li.attr("c"))
+                        .attr("cityName", li.attr("v"))
             buildCountyUl()
-            show(ID("countyUl").parentElement)
-            ID("birthPlace").innerText = ID("birthPlace").getAttribute("provinceName") + " - " + this.getAttribute("v")
+            birthPlace.text(birthPlace.attr("provinceName") + " - " + li.attr("v"))
         })
     })
-    cityUl.parentElement.scrollTop = 0
+    cityUl.parent().show().scrollTop(0)
 }
 
 // 构建区信息
 function buildCountyUl() {
-    let provinceIndex = ID("birthPlace").getAttribute("provinceIndex")
-    let cityIndex = ID("birthPlace").getAttribute("cityIndex")
+    let birthPlace = $("birthPlace")
+    let provinceIndex = birthPlace.attr("provinceIndex")
+    let cityIndex = birthPlace.attr("cityIndex")
     let counties = cityJsonData[provinceIndex].l[cityIndex].l
-    let countyUl = ID("countyUl")
+    let countyUl = $("countyUl")
     counties.forEach((county, index) => {
-        appendHTML(countyUl, getLiHTML(county.c, county.v, false), function() {
-            siblings(this, node => {
-                node.classList.remove("hover")
+        countyUl.append(getLiHTML(county.c, county.v, false, county.c == birthPlace.attr("countyCode")), function() {
+            let li = $(this)
+            li.siblings.forEach(node => {
+                $(node).removeClass("hover")
             })
-            this.classList.add("hover")
-            ID("birthPlace").setAttribute("countyIndex", index)
-            ID("birthPlace").setAttribute("countyCode", this.getAttribute("c"))
-            ID("birthPlace").setAttribute("countyName", this.getAttribute("v"))
-            ID("birthPlace").innerText = ID("birthPlace").getAttribute("provinceName") + " - " + ID("birthPlace").getAttribute("cityName") + " - " + this.getAttribute("v")
-            hide("birthSelect")
+            li.addClass("hover")
+            birthPlace.attr("countyIndex", index)
+                        .attr("countyCode", li.attr("c"))
+                        .attr("countyName", li.attr("v"))
+                        .text(birthPlace.attr("provinceName") 
+                            + " - " + birthPlace.attr("cityName") 
+                            + " - " + li.attr("v"))
+            $("birthSelect").hide()
+            // 同步数据
+            configJsonData.birthPlace = {
+                "provinceindex": birthPlace.attr("provinceindex"),
+                "provincecode": birthPlace.attr("provincecode"),
+                "provincename": birthPlace.attr("provincename"),
+                "cityindex": birthPlace.attr("cityindex"),
+                "citycode": birthPlace.attr("citycode"),
+                "cityname": birthPlace.attr("cityname"),
+                "countyindex": birthPlace.attr("countyindex"),
+                "countycode": birthPlace.attr("countycode"),
+                "countyname": birthPlace.attr("countyname"),
+                "text": birthPlace.text()
+            }
+            syncConfig()
         })
     })
-    countyUl.parentElement.scrollTop = 0
+    countyUl.parent().show().scrollTop(0)
 }
 
 // li html
-function getLiHTML(code, value, hasI) {
-    return "<li c='" + code + "' v='" + value + "'>"
+function getLiHTML(code, value, hasI, curr) {
+    return "<li c='" + code + "' v='" + value + "' class='" + (curr ? "hover" : "") + "'>"
             + "<span>" + value + "</span>"
             + (hasI ? "<i>></i>" : "")
             + "</li>"
@@ -118,53 +169,207 @@ function getLiHTML(code, value, hasI) {
  */
 
 // 出生年月日选择框 点击
-ID("birthDay").onclick = function() {
-    toggle("birthPicker")
-    ID("birthDay").classList.add("hover")
-}
+$("birthDay").click(_ =>{
+    let birthPicker = $("birthPicker")
+    birthPicker.isShow() ? hideBirthPicker() : (birthPicker.show(),$("birthDay").addClass("hover"))
+})
 
 // 失去焦点时 判断当前获得焦点的节点
-ID("birthDay").onblur = ID("birthPicker").onblur = function() {
+$("birthDay").blur(pickerClick)
+$("birthPicker").blur(pickerClick)
+
+function pickerClick() {
     setTimeout(_ => {
         if(document.activeElement.id == "birthDay" || document.activeElement.id == "birthPicker") {
             return
         }else {
-            hide("birthPicker")
-            ID("birthDay").classList.remove("hover")
+            hideBirthPicker()
         }
     }, 50)
 }
+
+//隐藏日历选择
+function hideBirthPicker() {
+    $("birthPicker").hide()
+    let birthDay = $("birthDay")
+    birthDay.removeClass("hover")
+    if(birthDay.attr("day")) {
+        birthDay.removeClass("error")
+    }else {
+        birthDay.addClass("error")
+    }
+}
+
+// 构建当前日期的日历
+function buildDatePicker() {
+    let birthDay = $("birthDay")
+    birthDay.attr("year", configJsonData.birthDay.year)
+    birthDay.attr("month", configJsonData.birthDay.month)
+    birthDay.attr("day", configJsonData.birthDay.day)
+    birthDay.attr("date", configJsonData.birthDay.date)
+    birthDay.text(configJsonData.birthDay.text)
+    let year = parseInt(configJsonData.birthDay.year)
+    let month = parseInt(configJsonData.birthDay.month)
+    let day = parseInt(configJsonData.birthDay.day)
+    $("yearSpan").text(year + " 年")
+    $("monthSpan").text(month + 1 + " 月")
+    buildPickerDate(year, month, day)
+}
+
+// 构建年份
+
+// 构建月份
+
+// 构建日历
+function buildPickerDate(year, month, day) {
+    let birthDay = $("birthDay")
+    let birthPicker = $("birthPicker")
+    let dateTable = $("dateTable")
+    let tbody = document.createElement("tbody")
+    let weekHeadTr = document.createElement("tr")
+    for(let week of ["一","二","三","四","五","六","日"]) {
+        let th = document.createElement("th")
+        th.innerText = week
+        weekHeadTr.appendChild(th)
+    }
+    tbody.appendChild(weekHeadTr)
+
+    let prevDay = new Date(year, month, 0).getDay()
+    let maxDay = new Date(year, month + 1, 0).getDate()
+    let nextDay = 7 - (maxDay + prevDay) % 7
+
+    let weekCount = (prevDay + maxDay + nextDay) / 7
+    let index = 1 - prevDay
+
+    for(let week = 0; week < weekCount; week ++) {
+        let weekTr = document.createElement("tr")
+        for(let weekDay = 0; weekDay < 7; weekDay ++) {
+            let td = document.createElement("td")
+            if(index < 1 || index > maxDay) {
+                td.innerHTML = "<div><span></span></div>"
+                $(td).addClass("empty")
+            }else {
+                td.innerHTML = "<div><span>" + index + "</span></div>"
+                let date = index
+                td.onclick = _ => {
+                    birthDay.attr("year", year)
+                            .attr("month", month)
+                            .attr("day", date)
+                            .attr("date", "" + year + $.numFill(month + 1) + $.numFill(date))
+                            .text(year + " 年 " + (month + 1) + " 月 " + date + " 日")
+                    $(dateTable.children()[0]).children().forEach((nodetr, indextr) => {
+                        $(nodetr).children().forEach((nodetd, indextd) => {
+                            $(nodetd).removeClass("current")
+                            if(Math.ceil((date + prevDay) / 7) == indextr && (date + prevDay) % 7 == indextd + 1) {
+                                $(nodetd).addClass("current")
+                            }
+                        })
+                    })
+                    birthPicker.hide()
+                    // 同步数据
+                    configJsonData.birthDay = {
+                        "year": birthDay.attr("year"),
+                        "month": birthDay.attr("month"),
+                        "day": birthDay.attr("day"),
+                        "date": birthDay.attr("date"),
+                        "text": birthDay.text()
+                    }
+                    syncConfig()
+                }
+                if(index == day && birthDay.attr("year") == year && birthDay.attr("month") == month) {
+                    $(td).addClass("current")
+                }
+            }
+            index ++
+            weekTr.appendChild(td)
+        }
+        tbody.appendChild(weekTr)
+    }
+    dateTable.append(tbody)
+}
+
+/**
+ * 性别选择
+ */
+
+//
+function buildSexLabel() {
+    $("sexLabel").attr("sex", configJsonData.sex.sex)
+    $("sexLabel").text(configJsonData.sex.text)
+}
+
+// 性别选择框 点击
+$("sexLabel").click(_ => {
+    let sexSelect = $("sexSelect")
+    sexSelect.isShow() ? hideSexSelect() : (sexSelect.show(),$("sexLabel").addClass("hover"))
+})
+
+// 失去焦点时 判断当前获得焦点的节点
+$("sexLabel").blur(sexSelectClick)
+$("sexSelect").blur(sexSelectClick) 
+
+function sexSelectClick() {
+    setTimeout(_ => {
+        if(document.activeElement.id == "sexLabel" || document.activeElement.id == "sexSelect") {
+            return
+        }else {
+            hideSexSelect()
+        }
+    }, 50)
+}
+
+//隐藏 性别选择
+function hideSexSelect() {
+    $("sexSelect").hide()
+    let sexLabel = $("sexLabel")
+    sexLabel.removeClass("hover")
+    if(sexLabel.attr("sex")) {
+        sexLabel.removeClass("error")
+    }else {
+        sexLabel.addClass("error")
+    }
+}
+
+// 点击性别
+function sexClick() {
+    let sexLabel = $("sexLabel")
+    let li = $(this)
+    sexLabel.attr("sex", li.attr("c"))
+    sexLabel.text(li.attr("v"))
+    $("sexSelect").hide()
+    // 同步数据
+    configJsonData.sex = {
+        "sex": sexLabel.attr("sex"),
+        "text": sexLabel.text()
+    }
+    syncConfig()
+}
+
+$("male").click(sexClick)
+$("female").click(sexClick)
 
 /**
  * 生成
  */
 
 // 点击生成
-ID("creat").onclick = function() {
+$("creat").click(_ => {
 
-    let county = ID("birthPlace").getAttribute("countyCode")
+    let county = $("birthPlace").attr("countyCode")
+    let birthDay = $("birthDay").attr("date")
     
-    if(!county) return
-
-    let birthDay = ID("birthDay").value.replace(/-/g,"")
+    if(!county || !birthDay) return
 
     let preStr = county + birthDay
+    
+    let sex = $("sexLabel").attr("sex")
+    let creater = $("creater")
 
-    let sex = ID("sex").value
-
-    let creater = ID("creater")
+    creater.html("")
 
     for(let index = parseInt(sex); index < 1000; index += 2) {
 
-        let nextStr = index
-
-        if(index < 10) {
-            nextStr = "00" + index
-        }else if(index < 100) {
-            nextStr = "0" + index
-        }
-
-        let preCode = preStr + nextStr
+        let preCode = preStr + $.numFill(index, 3)
 
         let sum = parseInt(preCode[0]) * 7
                 + parseInt(preCode[1]) * 9
@@ -221,12 +426,25 @@ ID("creat").onclick = function() {
                 break;
         }
         let code = preCode + lastCode
-        let p = document.createElement("p")
-        p.innerText = code
-        creater.appendChild(p)
-    }
 
-}
+        let name = nameJsonData.familyNamesSin[$.random(nameJsonData.familyNamesSin.length)]
+        if(sex == "1") {
+            name += nameJsonData.maleNames[$.random(nameJsonData.maleNames.length)] + nameJsonData.maleNames[$.random(nameJsonData.maleNames.length)]
+        }else{
+            name += nameJsonData.femaleNames[$.random(nameJsonData.femaleNames.length)] + nameJsonData.femaleNames[$.random(nameJsonData.femaleNames.length)]
+        }
+
+        let tr = document.createElement("tr")
+        let nameTd = document.createElement("td")
+        $(nameTd).text(name)
+        let cardTd = document.createElement("td")
+        $(cardTd).text(code)
+
+        $(tr).append(nameTd).append(cardTd)
+
+        creater.append(tr)
+    }
+})
 
 /**
  * 页面初始化
@@ -234,6 +452,12 @@ ID("creat").onclick = function() {
 
 // 初始化省 ul
 buildProvinceUl()
+
+// 初始化日历插件
+buildDatePicker()
+
+// 初始化性别
+buildSexLabel()
 
 /**
  * 标题栏按钮
@@ -243,11 +467,11 @@ buildProvinceUl()
 // document.getElementById("setting").onclick = toggleSetting
 
 //最小化
-ID("min").onclick = function() {
+$("min").click(_ => {
     remote.getCurrentWindow().minimize()
-}
+})
 
 //关闭
-ID("close").onclick = function() {
+$("close").click(_ => {
     remote.getCurrentWindow().hide()
-}
+})

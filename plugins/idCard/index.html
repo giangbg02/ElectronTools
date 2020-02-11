@@ -24,16 +24,15 @@
         <div class="birthMenu">
           <ul class="birthUl" id="provinceUl"></ul>
         </div>
-        <div class="birthMenu hide">
+        <div class="birthMenu">
           <ul class="birthUl" id="cityUl"></ul>
         </div>
-        <div class="birthMenu hide">
+        <div class="birthMenu">
           <ul class="birthUl" id="countyUl"></ul>
         </div>
       </div>
     </div>
     <label id="birthDay" class="labelButton" tabindex="0">请选择出生年月日</label>
-    <input type="date" name="" id="">
     <div id="birthPicker" class="datePicker hide" tabindex="0">
       <div class="pickerPanel">
         <div class="pickerHeader">
@@ -45,243 +44,7 @@
           <button id="nextMonth" class="nextButton">&gt;</button>
         </div>
         <div class="pickerContent">
-          <table id="dateTable" class="">
-            <tbody>
-              <tr>
-                <th>日</th>
-                <th>一</th>
-                <th>二</th>
-                <th>三</th>
-                <th>四</th>
-                <th>五</th>
-                <th>六</th>
-              </tr>
-              <tr>
-                <td>
-                  <div>
-                    <span>
-                      27
-                    </span>
-                  </div>
-                </td>
-                <td>
-                  <div><span>
-                      28
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      29
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      30
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      31
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      1
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      2
-                    </span></div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div><span>
-                      3
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      4
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      5
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      6
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      7
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      8
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      9
-                    </span></div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div><span>
-                      10
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      11
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      12
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      13
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      14
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      15
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      16
-                    </span></div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div><span>
-                      17
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      18
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      19
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      20
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      21
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      22
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      23
-                    </span></div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div><span>
-                      24
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      25
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      26
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      27
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      28
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      29
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      30
-                    </span></div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div><span>
-                      31
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      1
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      2
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      3
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      4
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      5
-                    </span></div>
-                </td>
-                <td>
-                  <div><span>
-                      6
-                    </span></div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <table id="dateTable"></table>
           <table id="yearTable" class="hide">
             <tbody>
               <tr>
@@ -353,14 +116,28 @@
         </div>
       </div>
     </div>
-    <div class="sexTitle">性别</div>
-    <div class="sex">
-      <select id="sex">
-        <option value="1">男</option>
-        <option value="0">女</option>
-      </select>
-    </div><button id="creat">生成</button>
-    <div class="creater" id="creater"></div>
+    <label id="sexLabel" class="labelButton" tabindex="0" sex="1">男</label>
+    <div class="birthPopper hide" id="sexSelect" tabindex="0">
+      <div class="birthPanel">
+        <div class="birthMenu">
+          <ul class="birthUl">
+            <li c="1" v="男" id="male"><span>男</span></li>
+            <li c="0" v="女" id="female"><span>女</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <button id="creat">生成</button>
+    <div class="creater">
+      <table>
+        <thead><tr><td>姓名</td><td>身份证号</td></tr></thead>
+      </table>
+      <div class="createrDiv">
+        <table>
+          <tbody id="creater"></tbody>
+        </table>
+      </div>
+    </div>
   </div>
   <script>
     require('./index.js')
