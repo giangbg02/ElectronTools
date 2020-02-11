@@ -64,8 +64,12 @@ class domUtils {
         return this
     }
     // 当前节点的兄弟节点
-    siblings(callback) {
-        this.node.parentElement.childNodes.forEach(callback)
+    siblings() {
+        return this.node.parentElement.childNodes
+    }
+    // 当前节点的子节点
+    children() {
+        return this.node.childNodes
     }
     //获取/设置节点参数
     attr(name, value) {
@@ -87,8 +91,12 @@ class domUtils {
     }
     //修改节点 文本
     text(text) {
-        this.node.innerText = text
-        return this
+        if(text == "" || text == "0" || text) {
+            this.node.innerText = text
+            return this
+        }else {
+            return this.node.innerText
+        }
     }
     //重定向到当前节点的父节点
     parent() {
