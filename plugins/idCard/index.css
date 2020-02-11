@@ -175,7 +175,7 @@ body {
 }
 
 #birthDay {
-    width: 550px;
+    width: 322px;
 }
 
 .datePicker {
@@ -297,7 +297,63 @@ body {
     background-color: #409eff;
 }
 
+#sexLabel {
+    width: 84px;
+}
 
+#sexSelect {
+    left: 375px;
+    top: 142px;
+}
+
+#sexSelect .birthMenu{
+    height: 76px;
+}
+
+.creater {
+    margin-top: 10px;
+    margin-left: 25px;
+    font-size: 14px;
+    width: 550px;
+    text-align: center;
+    border: 0px;
+    height: 430px;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+}
+
+.creater table {
+    width: 100%;
+    border-spacing: 0px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.createrDiv {
+    height: 370px;
+    overflow: auto;
+}
+
+.creater .createrDiv table {
+    padding-left: 4px;
+    padding-right: 0px;
+}
+
+.creater thead tr {
+    height: 50px;
+}
+
+.creater tr td:first-child {
+    width: 150px;
+}
+
+.creater tbody tr {
+    height: 33px;
+}
+
+.creater tbody tr:nth-child(odd){
+    background: #f5f7fa;
+}
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 ::-webkit-scrollbar
