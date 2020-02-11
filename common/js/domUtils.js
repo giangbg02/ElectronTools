@@ -47,11 +47,16 @@ class domUtils {
     removeClass(className) {
         this.node.classList.remove(className)
     }
-    //添加向节点末尾添加子节点
+    //添加向节点末尾添加子节点   // let fragment = document.createDocumentFragment()
     append(html, clickCallback) {
-        let temp = document.createElement("div")
-        temp.innerHTML = html
-        let targetNode = temp.lastElementChild
+        let targetNode
+        if(typeof html == "string") {
+            let temp = document.createElement("div")
+            temp.innerHTML = html
+            targetNode = temp.lastElementChild
+        }else {
+            targetNode = html.node || html
+        }
         if(clickCallback) {
             targetNode.onclick = clickCallback
         }
