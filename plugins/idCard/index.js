@@ -182,6 +182,8 @@ function pickerClick() {
     setTimeout(_ => {
         if(document.activeElement.id == "birthDay" || document.activeElement.id == "birthPicker") {
             return
+        }else if(document.activeElement.className == "prevButton" || document.activeElement.className == "nextButton") {
+            return
         }else {
             hideBirthPicker()
         }
@@ -216,6 +218,58 @@ function buildDatePicker() {
     buildPickerDate(year, month, day)
 }
 
+//上年点击
+$("prevYear").click(_ => {
+    let year = configJsonData.birthDay.year = configJsonData.birthDay.year - 1
+    let month = parseInt(configJsonData.birthDay.month)
+    let day = parseInt(configJsonData.birthDay.day)
+    $("yearSpan").text(year + " 年")
+    $("monthSpan").text(month + 1 + " 月")
+    buildPickerDate(year, month, day)
+})
+
+//上月点击
+$("prevMonth").click(_ => {
+    let year = parseInt(configJsonData.birthDay.year)
+    let month = parseInt(configJsonData.birthDay.month)
+    let day = parseInt(configJsonData.birthDay.day)
+    if(month == 0) {
+        configJsonData.birthDay.month = month = 11
+        configJsonData.birthDay.year(-- year)
+    }else {
+        configJsonData.birthDay.month = month = month - 1
+    }
+    $("yearSpan").text(year + " 年")
+    $("monthSpan").text(month + 1 + " 月")
+    buildPickerDate(year, month, day)
+})
+
+//下月点击
+$("nextMonth").click(_ => {
+    let year = parseInt(configJsonData.birthDay.year)
+    let month = parseInt(configJsonData.birthDay.month)
+    let day = parseInt(configJsonData.birthDay.day)
+    if(month == 11) {
+        configJsonData.birthDay.month = month = 0
+        configJsonData.birthDay.year(++ year)
+    }else {
+        configJsonData.birthDay.month = month = month + 1
+    }
+    $("yearSpan").text(year + " 年")
+    $("monthSpan").text(month + 1 + " 月")
+    buildPickerDate(year, month, day)
+})
+
+//下年点击
+$("nextYear").click(_ => {
+    let year = configJsonData.birthDay.year = configJsonData.birthDay.year - 0 + 1
+    let month = parseInt(configJsonData.birthDay.month)
+    let day = parseInt(configJsonData.birthDay.day)
+    $("yearSpan").text(year + " 年")
+    $("monthSpan").text(month + 1 + " 月")
+    buildPickerDate(year, month, day)
+})
+
 // 构建年份
 
 // 构建月份
@@ -224,7 +278,7 @@ function buildDatePicker() {
 function buildPickerDate(year, month, day) {
     let birthDay = $("birthDay")
     let birthPicker = $("birthPicker")
-    let dateTable = $("dateTable")
+    let dateTable = $("dateTable").html("")
     let tbody = document.createElement("tbody")
     let weekHeadTr = document.createElement("tr")
     for(let week of ["一","二","三","四","五","六","日"]) {
@@ -260,7 +314,7 @@ function buildPickerDate(year, month, day) {
                     $(dateTable.children()[0]).children().forEach((nodetr, indextr) => {
                         $(nodetr).children().forEach((nodetd, indextd) => {
                             $(nodetd).removeClass("current")
-                            if(Math.ceil((date + prevDay) / 7) == indextr && (date + prevDay) % 7 == indextd + 1) {
+                            if(Math.ceil((date + prevDay) / 7) == indextr && (date + prevDay) % 7 == (indextd + 1) % 7) {
                                 $(nodetd).addClass("current")
                             }
                         })
