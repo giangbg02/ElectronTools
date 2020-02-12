@@ -20,6 +20,7 @@ body {
 
 .title-logo {
     width: 32px;
+    height: 32px;
     margin: 9px;
     -webkit-user-drag: none;
 }

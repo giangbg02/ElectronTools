@@ -31,6 +31,8 @@ html, body, .container {
 }
 
 .item img {
+    width: 64px;
+    height: 64px;
     margin: 0 18px;
     -webkit-user-drag: none;
 }
