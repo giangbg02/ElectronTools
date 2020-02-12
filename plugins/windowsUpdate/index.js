@@ -1,5 +1,7 @@
 const {remote} = require('electron')
 
+const $ = require('../../common/js/domUtils')
+
 var count=0;
 var stage=0;
 var stage1=0;
@@ -15,31 +17,31 @@ function timer() {
     let interval = setInterval(_ => {
         if (count < 100){
             count ++;
-            document.getElementById("timer").innerHTML=count +'%';
+            $("timer").html(count +'%')
         }else{
             if(count == 100){
-                document.getElementById("ref").innerHTML=nextRef +'';
+                $("ref").html(nextRef +'')
                 count ++;
             }
             if(stage < 100){
                 stage ++;
-                document.getElementById("timer").innerHTML=stage +'%';
+                $("timer").html(stage +'%')
             }else{
                 if(stage == 100){
-                    document.getElementById("ref").innerHTML=finalRef +'';
+                    $("ref").html(finalRef +'')
                     stage ++;
                 }
                 if(stage1 < 100){
                     stage1 ++;
-                    document.getElementById("timer").innerHTML=stage1 +'%';
+                    $("timer").html(stage1 +'%')
                 }else{
                     clearInterval(interval);
                     clearInterval(counter);
-                    document.getElementById("ref").innerHTML=complateRef + '';
-                    document.getElementById("timer").innerHTML='';
-                    document.getElementById("completd").innerHTML='';
-                    document.getElementById("warn").innerHTML='';
-                    document.getElementById("bottom").innerHTML='';
+                    $("ref").html(complateRef + '')
+                    $("timer").html("")
+                    $("completd").html("")
+                    $("warn").html("")
+                    $("bottom").html("")
 
                     if(updateError){
                         changeToUpdateErrorPage()
@@ -73,10 +75,10 @@ document.addEventListener('click', function(){
     }
 })
 document.addEventListener('keyup', function(e){
-    if(e.keyCode == keyCode.Enter && updateError){
+    if(e.keyCode == $.keyCode.Enter && updateError){
         updateError = null
         changeToUpdateErrorPage()
-    }else if(e.keyCode == keyCode.Escape && (updateSuccess || (updateError == null))){
+    }else if(e.keyCode == $.keyCode.Escape && (updateSuccess || (updateError == null))){
         remote.getCurrentWindow().hide()
     }
 })
@@ -84,6 +86,6 @@ document.addEventListener('keyup', function(e){
 function changeToUpdateErrorPage() {
 
     clearInterval(counter);
-    document.getElementById("updating").classList.toggle("hide")
-    document.getElementById("updateError").classList.toggle("hide")
+    $("updating").toggle("hide")
+    $("updateError").toggle("hide")
 }
