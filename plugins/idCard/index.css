@@ -21,6 +21,7 @@ body {
 
 .title-logo {
     width: 32px;
+    height: 32px;
     margin: 9px;
     -webkit-user-drag: none;
 }
@@ -358,6 +359,18 @@ body {
 
 #creater {
     user-select: text;
+}
+
+#creat {
+    cursor: pointer;
+    border: 1px solid #dcdfe6;
+    outline: none;
+    padding: 9px 29px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #409eff;
+    border-color: #409eff;
+    margin-left: 25px;
 }
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
