@@ -47,6 +47,10 @@ class domUtils {
     removeClass(className) {
         this.node.classList.remove(className)
     }
+    //判断样式
+    hasClass(className) {
+        this.node.classList.contains(className)
+    }
     //添加向节点末尾添加子节点   // let fragment = document.createDocumentFragment()
     append(html, clickCallback) {
         let targetNode
