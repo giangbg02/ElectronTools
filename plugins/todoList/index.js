@@ -4,6 +4,8 @@ const remote = electron.remote;
 const ipc = electron.ipcRenderer;
 const { Menu, MenuItem } = remote
 
+const $ = require('../../common/js/domUtils')
+
 //nconf 实例
 const config = require('../../common/js/config').file('plugins/todoList');
 
@@ -87,7 +89,7 @@ function addColumnFunc(index, node) {
 
     input.onblur = input.onkeydown = function(evt){
         let spanVal = span.innerText
-        if(evt.type == "blur" || evt.keyCode == keyCode.Enter) {
+        if(evt.type == "blur" || evt.keyCode == $.keyCode.Enter) {
             if(input.value == ""){
                 if(spanVal == ""){
                     input.parentElement.parentElement.parentElement.remove()
@@ -105,7 +107,7 @@ function addColumnFunc(index, node) {
                 }
             }
             toggleColumnInputSpan(input, span)
-        }else if(evt.keyCode == keyCode.Escape) {
+        }else if(evt.keyCode == $.keyCode.Escape) {
             if(spanVal == ""){
                 input.onblur = null
                 this.parentElement.parentElement.parentElement.remove()
@@ -207,7 +209,7 @@ function addItemFunc(group, itemData, position, node) {
     span.onblur = span.onkeydown = function(evt){
         let spanText = this.innerText
         let spanVal = this.value
-        if(evt.type == "blur" || evt.keyCode == keyCode.Enter) {
+        if(evt.type == "blur" || evt.keyCode == $.keyCode.Enter) {
             if(spanText == ""){
                 if(spanVal == ""){
                     this.parentElement.remove()
@@ -226,7 +228,7 @@ function addItemFunc(group, itemData, position, node) {
                 }
             }
             span.contentEditable = false
-        }else if(evt.keyCode == keyCode.Escape) {
+        }else if(evt.keyCode == $.keyCode.Escape) {
             if(spanVal == ""){
                 this.onblur = null
                 this.parentElement.remove()

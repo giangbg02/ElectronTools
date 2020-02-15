@@ -7,6 +7,8 @@ const { Menu, MenuItem } = remote
 
 const config = require('../../common/js/config').file('plugins/musicAllInOne');
 
+const $ = require('../../common/js/domUtils')
+
 var playerConfig = config.get("playerConfig")
 var playerStatus = config.get("playerStatus")
 var musicSearch = config.get("musicSearch")
@@ -58,7 +60,7 @@ function siteCodeToName(site) {
 
 //时长格式化
 function timeFormate(time) {
-    return numAddZero(parseInt(time / 60)) + ":" + numAddZero(time % 60)
+    return $.numFill(parseInt(time / 60)) + ":" + $.numFill(time % 60)
 }
 
 //上次收听时间格式化
@@ -72,7 +74,7 @@ function lastTimeFormat(time) {
         return parseInt(between /(1000 * 60 * 60)) + "小时前"
     }else {
         let last = new Date(time)
-        return last.getFullYear() + "-" + numAddZero(last.getMonth() + 1) + "-" + numAddZero(last.getDate())
+        return last.getFullYear() + "-" + $.numFill(last.getMonth() + 1) + "-" + $.numFill(last.getDate())
     }
 }
 
@@ -93,78 +95,80 @@ function getLocalMusicFileInfo(data) {
 
 var currentContainer = "musicPlayFunc"
 //正在播放功能点击
-ID("musicPlayFunc").onclick = function(e) {
+$("musicPlayFunc").click(_ => {
     if(currentContainer != "musicPlayFunc") {
-        show("musicPlayContainer")
-        hide("musicListContainer")
-        hide("musicSearchCondition")
-        this.classList.add("hover")
-        ID(currentContainer).classList.remove("hover")
+        $("musicPlayContainer").show()
+        $("musicListContainer").hide()
+        $("musicSearchCondition").hide()
+        $("musicPlayFunc").addClass("hover")
+        $(currentContainer).removeClass("hover")
         currentContainer = "musicPlayFunc"
-        ID("musicLrcUl").scrollTop = lrcNodes[currentLrcLine].offsetTop - 251
+        $("musicLrcUl").scrollTop(lrcNodes[currentLrcLine].offsetTop - 251)
     }
-}
+})
 
 //音乐搜索功能点击
-ID("musicSearchFunc").onclick = function(e) {
+$("musicSearchFunc").click(_ => {
     if(currentContainer != "musicSearchFunc") {
-        hide("musicPlayContainer")
-        show("musicListContainer")
-        show("musicSearchCondition")
-        this.classList.add("hover")
-        ID(currentContainer).classList.remove("hover")
+        $("musicPlayContainer").hide()
+        $("musicListContainer").show()
+        $("musicSearchCondition").show()
+        $("musicSearchFunc").addClass("hover")
+        $(currentContainer).removeClass("hover")
         currentContainer = "musicSearchFunc"
 
-        ID("musicListOl").innerHTML = ""
-        let ol = document.createElement("li")
+        $("musicListOl").html("")
+        let ol = $(document.createElement("li"))
 
-        appendHTML(ol,"<span style='width: 30px;'>序号</span>")
-        appendHTML(ol,"<span style='width: 200px;'>标题</span>")
-        appendHTML(ol,"<span style='width: 130px;'>歌手</span>")
-        appendHTML(ol,"<span style='width: 60px;'>网站</span>")
-        appendHTML(ol,"<span style='width: 60px;'>时长</span>")
-        appendHTML(ol,"<span style='width: 60px;'>操作</span>")
+        ol.append("<span style='width: 30px;'>序号</span>")
+            .append("<span style='width: 200px;'>标题</span>")
+            .append("<span style='width: 130px;'>歌手</span>")
+            .append("<span style='width: 60px;'>网站</span>")
+            .append("<span style='width: 60px;'>时长</span>")
+            .append("<span style='width: 60px;'>操作</span>")
 
-        ID("musicListOl").appendChild(ol)
+        $("musicListOl").append(ol)
 
-        ID("musicListUl").innerHTML = ""
+        $("musicListUl").html("")
         
         buildSearchResultList()
     }
-}
+})
 
 //本地音乐功能点击
-ID("musicLocalFunc").onclick = function(e) {
-    hide("musicPlayContainer")
-    show("musicListContainer")
-    hide("musicSearchCondition")
+$("musicLocalFunc").click(_ => {
+    $("musicPlayContainer").hide()
+    $("musicListContainer").show()
+    $("musicSearchCondition").hide()
     if(currentContainer != "musicLocalFunc") {
-        this.classList.add("hover")
-        ID(currentContainer).classList.remove("hover")
+        $("musicLocalFunc").addClass("hover")
+        $(currentContainer).removeClass("hover")
         currentContainer = "musicLocalFunc"
-        ID("musicListOl").innerHTML = ""
-        let ol = document.createElement("li")
+        $("musicListOl").html("")
 
-        appendHTML(ol,"<span style='width: 30px;'>序号</span>")
-        appendHTML(ol,"<span style='width: 230px;'>标题</span>")
-        appendHTML(ol,"<span style='width: 180px;'>歌手</span>")
-        appendHTML(ol,"<span style='width: 60px;'>时长</span>")
-        appendHTML(ol,"<span style='width: 60px;'>操作</span>")
+        let ol = $(document.createElement("li"))
 
-        ID("musicListOl").appendChild(ol)
+        ol.append("<span style='width: 30px;'>序号</span>")
+            .append("<span style='width: 230px;'>标题</span>")
+            .append("<span style='width: 180px;'>歌手</span>")
+            .append("<span style='width: 60px;'>时长</span>")
+            .append("<span style='width: 60px;'>操作</span>")
 
-        ID("musicListUl").innerHTML = ""
+        $("musicListOl").append(ol)
+
+        $("musicListUl").html("")
         
         for (let index = 0; index < musicLocal.length; index++) {
             let data = musicLocal[index]
     
-            let li = document.createElement("li")
+            let li = $(document.createElement("li"))
     
-            appendHTML(li, "<span style='width: 30px;'>" + (index + 1) + "</span>")
-            appendHTML(li, "<span style='width: 230px;'>" + data.name + "</span>")
-            appendHTML(li, "<span style='width: 180px;'>" + data.author + "</span>")
-            appendHTML(li, "<span style='width: 60px;'>" + timeFormate(data.time) + "</span>")
-            appendHTML(li, "<div class='delete'></div>", _ =>{
+            li.append("<span style='width: 30px;'>" + (index + 1) + "</span>")
+                .append("<span style='width: 230px;'>" + data.name + "</span>")
+                .append("<span style='width: 180px;'>" + data.author + "</span>")
+                .append("<span style='width: 60px;'>" + timeFormate(data.time) + "</span>")
+                .append("<div class='delete'></div>", _ =>{
+
                 remote.dialog.showMessageBox(remote.getCurrentWindow(), {
                     // type        : "question",
                     buttons     : ["删除", "取消"],
@@ -187,75 +191,77 @@ ID("musicLocalFunc").onclick = function(e) {
                 })
             })
             
-            li.ondblclick = function(e) {
+            li.dblclick(_ => {
                 buildSetMusicInfo(index, true)
-            }
+            })
     
-            ID("musicListUl").appendChild(li)
+            $("musicListUl").append(li)
         }
     }
-}
+})
 
 //播放历史功能点击
-ID("musicHistoryFunc").onclick = function(e) {
-    hide("musicPlayContainer")
-    show("musicListContainer")
-    hide("musicSearchCondition")
+$("musicHistoryFunc").click(_ => {
+    $("musicPlayContainer").hide()
+    $("musicListContainer").show()
+    $("musicSearchCondition").hide()
+
     if(currentContainer != "musicHistoryFunc") {
-        this.classList.add("hover")
-        ID(currentContainer).classList.remove("hover")
+        $("musicHistoryFunc").addClass("hover")
+        $(currentContainer).removeClass("hover")
         currentContainer = "musicHistoryFunc"
-        ID("musicListOl").innerHTML = ""
-        let ol = document.createElement("li")
+        $("musicListOl").html("")
 
-        appendHTML(ol,"<span style='width: 30px;'>序号</span>")
-        appendHTML(ol,"<span style='width: 230px;'>标题</span>")
-        appendHTML(ol,"<span style='width: 180px;'>歌手</span>")
-        appendHTML(ol,"<span style='width: 120px;'>上次收听</span>")
+        let ol = $(document.createElement("li"))
 
-        ID("musicListOl").appendChild(ol)
+        ol.append("<span style='width: 30px;'>序号</span>")
+            .append("<span style='width: 230px;'>标题</span>")
+            .append("<span style='width: 180px;'>歌手</span>")
+            .append("<span style='width: 120px;'>上次收听</span>")
 
-        ID("musicListUl").innerHTML = ""
+        $("musicListOl").append(ol)
+
+        $("musicListUl").html("")
 
         for (let index = 0; index < musicHistory.length; index++) {
             let data = musicHistory[index]
     
-            let li = document.createElement("li")
+            let li = $(document.createElement("li"))
     
-            appendHTML(li, "<span style='width: 30px;'>" + (index + 1) + "</span>")
-            appendHTML(li, "<span style='width: 230px;'>" + data.name + "</span>")
-            appendHTML(li, "<span style='width: 180px;'>" + data.author + "</span>")
-            appendHTML(li, "<span style='width: 120px;'>" + lastTimeFormat(data.last) + "</span>")
+            li.append("<span style='width: 30px;'>" + (index + 1) + "</span>")
+            li.append("<span style='width: 230px;'>" + data.name + "</span>")
+            li.append("<span style='width: 180px;'>" + data.author + "</span>")
+            li.append("<span style='width: 120px;'>" + lastTimeFormat(data.last) + "</span>")
     
-            ID("musicListUl").appendChild(li)
+            $("musicListUl").append(li)
         }
     }
-}
+})
 
 //构建查询结果列表
 function buildSearchResultList(startIndex) {
 
-    if(ID("musicListUl").children.length == 0 && musicSearch.data.length > 0) {
-        appendHTML(ID("musicListUl"), "<li><span style='width: 600px;text-align: center;'>加载下一页</span></li>", _ => {
+    if($("musicListUl").children().length == 0 && musicSearch.data.length > 0) {
+        $("musicListUl").append("<li><span style='width: 600px;text-align: center;'>加载下一页</span></li>", _ => {
             musicSearch.page = musicSearch.page + 1
             musicSearchResult()
         })
     }
 
-    var loadPageLi = ID("musicListUl").lastElementChild
+    var loadPageLi = $("musicListUl").lastChild()
 
     for (let index = startIndex || 0; index < musicSearch.data.length; index++) {
         let data = musicSearch.data[index]
 
-        let li = document.createElement("li")
+        let li = $(document.createElement("li"))
 
-        appendHTML(li, "<span style='width: 30px;'>" + (index + 1) + "</span>")
-        appendHTML(li, "<span style='width: 200px;'>" + data.name + "</span>")
-        appendHTML(li, "<span style='width: 130px;'>" + data.author + "</span>")
-        appendHTML(li, "<span style='width: 60px;'>" + siteCodeToName(data.site) + "</span>")
-        appendHTML(li, "<span style='width: 60px;'>" + timeFormate(data.time) + "</span>")
-        appendHTML(li, "<div class='link'></div>", _ => {
-            openLink(data.link)
+        li.append("<span style='width: 30px;'>" + (index + 1) + "</span>")
+            .append("<span style='width: 200px;'>" + data.name + "</span>")
+            .append("<span style='width: 130px;'>" + data.author + "</span>")
+            .append("<span style='width: 60px;'>" + siteCodeToName(data.site) + "</span>")
+            .append("<span style='width: 60px;'>" + timeFormate(data.time) + "</span>")
+            .append("<div class='link'></div>", _ => {
+                openLink(data.link)
         })
 
         var localIndex = musicLocal.length ? musicLocal.findIndex(item => { return item.name == data.name && item.author == data.author }) : -1
@@ -263,7 +269,7 @@ function buildSearchResultList(startIndex) {
         if(localIndex < 0) {
             //歌曲信息可能过期,需要重新获取
             // data = getNewMusicDataInfo()
-            appendHTML(li, "<div class='download'></div>", _ => {
+            li.append("<div class='download'></div>", _ => {
                 musicLocal.unshift({
                     "name"  : data.name,
                     "author": data.author,
@@ -272,7 +278,7 @@ function buildSearchResultList(startIndex) {
                     "time"  : data.time
                 })
                 downloadMusicFiles(data, _ => {
-                    li.lastChild.remove()
+                    li.lastChild().remove()
                 })
                 localSync()
                 playerStatus.index = playerStatus.index + 1
@@ -280,13 +286,13 @@ function buildSearchResultList(startIndex) {
             })
         }
         
-        li.ondblclick = function(e) {
+        li.dblclick(_ => {
             setMusicInfo(data.name, data.author, data.time, data.url, data.pic, data.lrc, true, false)
-        }
+        })
 
-        ID("musicListUl").insertBefore(li, loadPageLi)
+        $("musicListUl").insert(li, loadPageLi)
     }
-    ID("musicListUl").scrollTop = ID("musicListUl").scrollHeight
+    $("musicListUl").scrollTop($("musicListUl").scrollHeight())
 }
 
 /**
@@ -294,80 +300,80 @@ function buildSearchResultList(startIndex) {
  */
 
 //最小化
-ID("min").onclick = function() {
+$("min").click(_ => {
     remote.getCurrentWindow().minimize()
-}
+})
 
 //关闭
-ID("close").onclick = function() {
+$("close").click(_ => {
     remote.getCurrentWindow().hide()
-}
+})
 
 //选择网站select
-ID("musicSearchSite").onfocus = function(){
-    show("musicSearchSiteUl")
-}
-ID("musicSearchSite").onblur = function(){
+$("musicSearchSite").focus(_ => {
+    $("musicSearchSiteUl").show()
+})
+$("musicSearchSite").blur(_ => {
     setTimeout(_ => {
-        hide("musicSearchSiteUl")
+        $("musicSearchSiteUl").hide()
     }, 200)
-}
+})
 
 //模拟option点击事件
-let musicSearchSiteLiList = ID("musicSearchSiteUl").children
+let musicSearchSiteLiList = $("musicSearchSiteUl").children()
 for(var i=0;i<musicSearchSiteLiList.length;i++){
-    musicSearchSiteLiList[i].onclick = function(){
-        ID("musicSearchSite").value = this.innerText
-        ID("musicSearchSiteValue").value = this.getAttribute('to')
-    }
+    $(musicSearchSiteLiList[i]).click(event => {
+        $("musicSearchSite").value($(event.currentTarget).text())
+        $("musicSearchSiteValue").value($(event.currentTarget).attr('to'))
+    })
 }
 
 //选择查询方式select
-ID("musicSearchType").onfocus = function(){
-    show("musicSearchTypeUl")
-}
-ID("musicSearchType").onblur = function(){
+$("musicSearchType").focus(_ => {
+    $("musicSearchTypeUl").show()
+})
+$("musicSearchType").blur(_ => {
     setTimeout(_ => {
-        hide("musicSearchTypeUl")
+        $("musicSearchTypeUl").hide()
     }, 200)
-}
+})
 
 //模拟option点击事件
-let musicSearchTypeLiList = ID("musicSearchTypeUl").children
+let musicSearchTypeLiList = $("musicSearchTypeUl").children()
 for(var i=0;i<musicSearchTypeLiList.length;i++){
-    musicSearchTypeLiList[i].onclick = function(){
-        ID("musicSearchType").value = this.innerText
-        ID("musicSearchTypeValue").value = this.getAttribute('to')
-    }
+    $(musicSearchTypeLiList[i]).click(event => {
+        $("musicSearchType").value($(event.currentTarget).text())
+        $("musicSearchTypeValue").value($(event.currentTarget).attr('to'))
+    })
 }
 
 //输入框回车
-ID("musicSearchInput").onkeydown = function(e) {
-    if(e.keyCode == keyCode.Enter) {
-        ID("musicSearchBtn").click()
+$("musicSearchInput").keydown(e => {
+    if(e.keyCode == $.keyCode.Enter) {
+        $("musicSearchBtn").click()
     }
-}
+})
 
 //点击查询按钮
-ID("musicSearchBtn").onclick = function(e) {
+$("musicSearchBtn").click(_ => {
 
-    if(ID("musicSearchInput").value.trim() == "") {
-        ID("musicSearchInput").value = ""
+    if($("musicSearchInput").value().trim() == "") {
+        $("musicSearchInput").value("")
         return
     }
 
     musicSearch = {
-        "query" : ID("musicSearchInput").value,
-        "type"  : ID("musicSearchTypeValue").value,
-        "site"  : ID("musicSearchSiteValue").value,
+        "query" : $("musicSearchInput").value(),
+        "type"  : $("musicSearchTypeValue").value(),
+        "site"  : $("musicSearchSiteValue").value(),
         "page"  : 1,
         "data"  : []
     }
 
-    ID("musicListUl").innerHTML = ""
+    $("musicListUl").html("")
 
     musicSearchResult()
-}
+})
 
 /**
  * 音乐播放页
@@ -380,8 +386,7 @@ let lrcLines = []
 let lrcNodes = []
 function setMusicLrc(lrc) {
     // console.log(lrc)
-    let musicLrcUl = ID("musicLrcUl")
-    musicLrcUl.innerHTML = ""
+    let musicLrcUl = $("musicLrcUl").html("")
     //将文本分隔成一行一行，存入数组
     var lines = lrc.split('\n'),
     //用于匹配时间的正则表达式，匹配的结果类似[xx:xx.xx]
@@ -391,7 +396,7 @@ function setMusicLrc(lrc) {
     currentLrcContext = ""
     lrcLines = []
     lrcNodes = []
-    musicLrcUl.classList.remove("noPadding")
+    musicLrcUl.removeClass("noPadding")
     //去掉头尾不含时间的行 同一个正则多次test会有问题 所以加了个 !(pattern.lastIndex = 0) 重置 index
     while (lines.length > 0 && !(pattern.lastIndex = 0) && !pattern.test(lines[0])) {
         lines = lines.slice(1);
@@ -421,9 +426,9 @@ function setMusicLrc(lrc) {
             return a[0] - b[0];
         });
         for(var i=0;i<lrcLines.length;i++){
-            appendHTML(musicLrcUl, "<li>" + lrcLines[i][1] + "</li>")
+            musicLrcUl.append("<li>" + lrcLines[i][1] + "</li>")
         }
-        lrcNodes = musicLrcUl.children
+        lrcNodes = musicLrcUl.children()
         currentLrcContext = lrcLines[0][0] == 0 ? lrcLines[0][1] : ""
         // musicLrcUl.firstChild.classList.add("current")
     }else{
@@ -431,16 +436,16 @@ function setMusicLrc(lrc) {
         lines = lrc.split('\n')
         if(lines.length > 0){
             for(var i=0;i<lines.length;i++){
-                appendHTML(musicLrcUl, "<li>" + lines[i] + "</li>")
+                musicLrcUl.append("<li>" + lines[i] + "</li>")
             }
-            musicLrcUl.classList.add("noPadding")
+            musicLrcUl.addClass("noPadding")
             currentLrcContext = "请打开主界面查看歌词"
             if(playerStatus.desktopLrc) {
                 currentLrcFunc()
             }
         }else{
-            appendHTML(musicLrcUl, "<li>暂无歌词</li>")
-            musicLrcUl.firstChild.classList.add("current")
+            musicLrcUl.append("<li>暂无歌词</li>")
+            musicLrcUl.firstChild.addClass("current")
             currentLrcContext = "暂无歌词"
             if(playerStatus.desktopLrc) {
                 currentLrcFunc()
@@ -536,17 +541,18 @@ function setMusicInfo(name, author, time, musicURL, picURL, lrcURL, autoPlay, lr
         lrcURL = fs.readFileSync(lrcURL, "UTF-8")
     }
     
-    ID("musicAudio").pause()
+    let musicAudio = $("musicAudio").node
+    musicAudio.pause()
     setMusicLrc(lrcURL)
-    ID("musicAudio").src = musicURL
-    ID("funcMusicPic").src = picURL
-    ID("funcMusicName").innerText = name
-    ID("funcMusicAuthor").innerText = author
+    musicAudio.src = musicURL
+    $("funcMusicPic").node.src = picURL
+    $("funcMusicName").text(name)
+    $("funcMusicAuthor").text(author)
     document.title = name + "-" + author
     setMusicTime(time)
     if(autoPlay) {
-        ID("musicAudio").play()
-        ID("playMusic").classList.add("pause")
+        musicAudio.play()
+        $("playMusic").addClass("pause")
         musicHistorySort(name, author)
     }
 }
@@ -573,8 +579,8 @@ function musicHistorySort(name, author) {
 
 //设置歌曲时间
 function setMusicTime(time) {
-    ID("playRange").max = time
-    ID("musicDuraTime").innerText = timeFormate(time)
+    $("playRange").attr("max", time)
+    $("musicDuraTime").text(timeFormate(time))
 }
 
 //在浏览器中打开链接
@@ -607,8 +613,9 @@ function musicDelete(index) {
 
 //解除本地文件占用
 function unlinkLocalMusic() {
-    ID("musicAudio").pause()
-    ID("musicAudio").src = ""
+    let musicAudio = $("musicAudio")
+    musicAudio.pause()
+    musicAudio.src = ""
 }
 
 /**
@@ -616,7 +623,7 @@ function unlinkLocalMusic() {
  */
 
 //上一曲
-ID("prevMusic").onclick = prevMusic
+$("prevMusic").click(prevMusic)
 
 //上一曲方法
 function prevMusic() {
@@ -643,17 +650,18 @@ function prevMusic() {
 }
 
 //播放 暂停
-ID("playMusic").onclick = function(e) {
-    if(this.classList.contains("pause")) {
-        ID("musicAudio").pause()
+$("playMusic").click(_ => {
+    let musicAudio = $("musicAudio").node
+    if($("playMusic").hasClass("pause")) {
+        musicAudio.pause()
     }else {
-        ID("musicAudio").play()
+        musicAudio.play()
     }
-    this.classList.toggle("pause")
-}
+    $("playMusic").toggle("pause")
+})
 
 //下一曲 按钮点击
-ID("nextMusic").onclick = nextMusic
+$("nextMusic").click(nextMusic)
 
 //下一曲方法
 function nextMusic() {
@@ -681,84 +689,87 @@ function nextMusic() {
 }
 
 //播放进度条
-ID("playRange").oninput = function(e) {
+$("playRange").input(_ => {
     isMoving = true
     playRangeInput()
-}
+})
 
 //正在移动进度条
 var isMoving = false
 function playRangeInput() {
-    let playRange = ID("playRange")
-    ID("musicCurrTime").innerText = timeFormate(playRange.value)
-    playRange.style.backgroundSize = playRange.value / playRange.max * 100 + "% 100%"
+    let playRange = $("playRange")
+    $("musicCurrTime").text(timeFormate(playRange.value()))
+    playRange.node.style.backgroundSize = playRange.value() / playRange.attr("max") * 100 + "% 100%"
 }
 
 //停止移动进度条
-ID("playRange").onmouseup = function(e) {
-    ID("musicAudio").pause();
-    ID("musicAudio").currentTime = this.value;
-    ID("musicAudio").play();
-    ID("playMusic").classList.add("pause")
+$("playRange").mouseup(_ => {
+    let musicAudio = $("musicAudio").node
+    musicAudio.pause();
+    musicAudio.currentTime = $("playRange").value()
+    musicAudio.play();
+    $("playMusic").addClass("pause")
     isMoving = false
-}
+})
 
 //静音
-ID("musicMute").onclick = function(e) {
-    let volumeRange = ID("volumeRange")
-    if(this.classList.contains("mute")){
-        volumeRange.value = playerStatus.volume
+$("musicMute").click(_ => {
+    let volumeRange = $("volumeRange")
+    if($("musicMute").hasClass("mute")){
+        volumeRange.value(playerStatus.volume)
     }else {
-        volumeRange.value = 0
+        volumeRange.value(0)
     }
     volumeRangeInput()
     statusSync()
-}
+})
 
 //音量调节
-ID("volumeRange").oninput = volumeRangeInput
+$("volumeRange").input(volumeRangeInput)
+
 function volumeRangeInput() {
-    let volume =  ID("volumeRange")
-    let volumeVal =  volume.value
+    let volume =  $("volumeRange")
+    let volumeVal = volume.value()
     if(volumeVal != "0") {
-        ID("musicMute").classList.remove("mute")
+        $("musicMute").removeClass("mute")
         playerStatus.mute = false
     }else {
-        ID("musicMute").classList.add("mute")
+        $("musicMute").addClass("mute")
         playerStatus.mute = true
     }
-    ID("musicVolume").innerText = volumeVal
-    volume.style.backgroundSize = volumeVal + "% 100%"
-    ID("musicAudio").volume = (volumeVal - 0) / 100
+    $("musicVolume").text(volumeVal)
+    volume.node.style.backgroundSize = volumeVal + "% 100%"
+    $("musicAudio").node.volume = (volumeVal - 0) / 100
 }
 
 //音量调节完成
-ID("volumeRange").onmouseup = function() {
-    playerStatus.volume = this.value
+$("volumeRange").mouseup(_ => {
+    playerStatus.volume = $("volumeRange").value()
     statusSync()
-}
+})
 
 //播放模式
-ID("playMode").onclick = function(e) {
-    if(this.classList.contains("list")){
-        this.classList.remove("list")
-        this.classList.add("random")
+$("playMode").click(_ => {
+    let playMode = $("playMode")
+    if(playMode.hasClass("list")){
+        playMode.removeClass("list")
+        playMode.addClass("random")
         playerStatus.mode = "random"
-    }else if(this.classList.contains("random")){
-        this.classList.remove("random")
-        this.classList.add("single")
+    }else if(playMode.hasClass("random")){
+        playMode.removeClass("random")
+        playMode.addClass("single")
         playerStatus.mode = "single"
-    }else if(this.classList.contains("single")){
-        this.classList.remove("single")
-        this.classList.add("list")
+    }else if(playMode.hasClass("single")){
+        playMode.removeClass("single")
+        playMode.addClass("list")
         playerStatus.mode = "list"
     }
     statusSync()
-}
+})
 
 //桌面歌词
-ID("musicLrc").onclick = function(e) {
-    if(this.classList.contains("hover")) {
+$("musicLrc").click(_ => {
+    if($("musicLrc").hasClass("hover")) {
         destroyLrcWindow()
         playerStatus.desktopLrc = false
     }else {
@@ -766,23 +777,23 @@ ID("musicLrc").onclick = function(e) {
         playerStatus.desktopLrc = true
     }
     statusSync()
-    this.classList.toggle("hover")
-}
+    $("musicLrc").toggle("hover")
+})
 
 //播放完成
-ID("musicAudio").onended = function(e) {
+$("musicAudio").ended(_ => {
     if(playerStatus.mode == "single") {
-        ID("musicAudio").play()
+        $("musicAudio").node.play()
     }else {
         nextMusic()
     }
-}
+})
 
 //播放进度随时间变化
-ID("musicAudio").ontimeupdate = function(e) {
-    let currentTime = this.currentTime
+$("musicAudio").timeupdate(event => {
+    let currentTime = event.currentTarget.currentTime
     if(!isMoving){
-        ID("playRange").value = currentTime
+        $("playRange").value(currentTime)
         playRangeInput()
     }
     if(lrcLines.length > 0) {
@@ -803,10 +814,10 @@ ID("musicAudio").ontimeupdate = function(e) {
         }
         if(currentIndex >= 0 && currentLrcLine != currentIndex) {
             if(currentLrcLine >= 0) {
-                lrcNodes[currentLrcLine].classList.remove("current")
+                $(lrcNodes[currentLrcLine]).removeClass("current")
             }
-            lrcNodes[currentIndex].classList.add("current")
-            ID("musicLrcUl").scrollTop = lrcNodes[currentIndex].offsetTop - 251
+            $(lrcNodes[currentIndex]).addClass("current")
+            $("musicLrcUl").scrollTop(lrcNodes[currentIndex].offsetTop - 251)
             currentLrcContext = lrcLines[currentIndex][1]
             if(playerStatus.desktopLrc) {
                 currentLrcFunc()
@@ -814,7 +825,7 @@ ID("musicAudio").ontimeupdate = function(e) {
         }
         currentLrcLine = currentIndex
     }
-}
+})
 
 //创建桌面歌词 向主进程通信
 function creatLrcWindow() {
@@ -883,17 +894,15 @@ document.addEventListener('contextmenu', (e) => {
  * 页面初始化
  */
 
-show("musicPlayContainer")
-
 //初始化播放设置
 
 
 //初始化音量
-ID("volumeRange").value = playerStatus.mute ? "0" : playerStatus.volume
+$("volumeRange").value(playerStatus.mute ? "0" : playerStatus.volume)
 volumeRangeInput()
 
 //初始化音乐列表播放模式
-ID("playMode").classList.add(playerStatus.mode)
+$("playMode").addClass(playerStatus.mode)
 
 //初始化歌曲
 if(playerStatus.index >= 0) {
@@ -902,7 +911,7 @@ if(playerStatus.index >= 0) {
 
 //初始化桌面歌词
 if(playerStatus.desktopLrc) {
-    ID("musicLrc").classList.add("hover")
+    $("musicLrc").addClass("hover")
     creatLrcWindow()
 }
 

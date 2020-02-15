@@ -29,7 +29,7 @@ const musicWindow = {
             slashes: true
         }))
         this.win.once('ready-to-show', () => {
-            // this.win.webContents.openDevTools()
+            this.win.webContents.openDevTools()
             cancelTitleBarMenu(this.win)
             this.win.show()
         })

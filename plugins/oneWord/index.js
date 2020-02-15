@@ -1,21 +1,16 @@
 const {remote, ipcRenderer} = require('electron')
 
+const $ = require('../../common/js/domUtils')
+
 var size = 50
 //页面赋值
 function setValue(word){
     size = 50
 
-    let one_word = document.getElementById('one_word')
-    one_word.innerText = word.word
-    one_word.className = className(word.word)
+    $("one_word").text(word.word).setClass(className(word.word))
+    $("word_from").text('—— ' + word.from).setClass(className(word.from))
 
-    let word_from = document.getElementById('word_from')
-    word_from.innerText = '—— ' + word.from
-    word_from.className = className(word.from)
-
-    one_word.style.fontSize = size + 'px'
-
-    reset_one_word(one_word)
+    reset_one_word()
 }
 
 //获取字符串的第一个文本, 判断中英文, 返回不同class
@@ -28,15 +23,17 @@ function className (str){
 }
 
 //解决字体过大导致的页面超高
-function reset_one_word(one_word){
-    let width = one_word.offsetHeight
-    console.log(width)
-    if(width > 327){
-        one_word.style.fontSize = -- size + 'px'
-        one_word.style.lineHeight = size * 2 * 0.85 + 'px'
+function reset_one_word(){
+    let one_word = $("one_word").node
+    let height = one_word.offsetHeight
+    console.log(height)
+    if(height > 327){
+        -- size
         reset_one_word(one_word)
     }else{
-        margin = (327 - width) / 2 + 70
+        margin = (327 - height) / 2 + 70
+        one_word.style.fontSize = size + 'px'
+        one_word.style.lineHeight = size * 2 * 0.85 + 'px'
         one_word.style.marginTop = margin + 'px'
     }
 }
@@ -48,7 +45,7 @@ ipcRenderer.on("readyChange", (event, arg) => {
 })
 
 document.addEventListener('keyup', function(e){
-    if(e.keyCode == keyCode.Escape){
+    if(e.keyCode == $.keyCode.Escape){
         ipcRenderer.send("oneWordRefresh")
     }
 })

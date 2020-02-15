@@ -2,11 +2,17 @@ const {remote, ipcRenderer} = require('electron')
 
 const config = require('../../common/js/config').file('plugins/2048');
 
+const $ = require('../../common/js/domUtils')
+
 let gameState = config.get()
 
 //同步state
 function stateSync() {
     config.set(null, gameState)
+}
+
+function ID(id) {
+    return document.getElementById(id)
 }
 
 //游戏大小
@@ -35,23 +41,23 @@ function keydownFunc(e) {
     let arrow = getPositionData(0, 0)
     switch(e.keyCode) {
         // 方向上 / W
-        case keyCode.w_W :
-        case keyCode.Up :
+        case $.keyCode.w_W :
+        case $.keyCode.Up :
             arrow.y = 1
             break
         // 方向下 / S
-        case keyCode.s_S :
-        case keyCode.Down :
+        case $.keyCode.s_S :
+        case $.keyCode.Down :
             arrow.y = -1
             break
         // 方向左 / A
-        case keyCode.a_A :
-        case keyCode.Left :
+        case $.keyCode.a_A :
+        case $.keyCode.Left :
             arrow.x = 1
             break
         // 方向右 / D
-        case keyCode.d_D :
-        case keyCode.Right :
+        case $.keyCode.d_D :
+        case $.keyCode.Right :
             arrow.x = -1
             break
         default :

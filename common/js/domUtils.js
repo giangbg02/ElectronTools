@@ -12,7 +12,7 @@ class domUtils {
         this.node = node;
         ( "blur focus focusin focusout resize scroll click dblclick " +
         "mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
-        "change select submit keydown keypress keyup contextmenu" ).split( " " ).forEach((item, index) => {
+        "change select submit keydown keypress keyup contextmenu input ended timeupdate" ).split( " " ).forEach((item, index) => {
             this[item] = callback => {
                 let event = "on" + item
                 callback ? this.node[event] = callback : this.node[event]()
@@ -49,7 +49,11 @@ class domUtils {
     }
     //判断样式
     hasClass(className) {
-        this.node.classList.contains(className)
+        return this.node.classList.contains(className)
+    }
+    //设置样式
+    setClass(className) {
+        this.node.className = className
     }
     //添加向节点末尾添加子节点   // let fragment = document.createDocumentFragment()
     append(html, clickCallback) {
@@ -67,13 +71,36 @@ class domUtils {
         this.node.appendChild(targetNode)
         return this
     }
+    // 在已存在节点前插入
+    insert(newItem, existingItem) {
+        if(existingItem) {
+            this.node.insertBefore(newItem.node || newItem, existingItem.node || existingItem)
+        }else {
+            this.node.parentElement.insertBefore(newItem.node || newItem, this.node)
+        }
+        return this
+    }
     // 当前节点的兄弟节点
     siblings() {
-        return this.node.parentElement.childNodes
+        return this.node.parentElement.children
     }
     // 当前节点的子节点
     children() {
-        return this.node.childNodes
+        return this.node.children
+    }
+    // 第一个子元素
+    firstChild() {
+        this.node = this.node.firstElementChild
+        return this
+    }
+    // 最后的一个子元素
+    lastChild() {
+        this.node = this.node.lastElementChild
+        return this
+    }
+    //  移除当前元素
+    remove() {
+        this.node.remove()
     }
     //获取/设置节点参数
     attr(name, value) {
@@ -82,6 +109,15 @@ class domUtils {
             return this
         }else {
             return this.node.getAttribute(name)
+        }
+    }
+    //获取元素值
+    value(value) {
+        if(value || value == "" || value == "0") {
+            this.node.value = value
+            return this
+        }else {
+            return this.node.value
         }
     }
     //修改节点html代码
@@ -111,6 +147,10 @@ class domUtils {
     scrollTop(scrollTop) {
         this.node.scrollTop = scrollTop
         return this
+    }
+    //滚动当前节点
+    scrollHeight() {
+        return this.node.scrollHeight
     }
 }
 
