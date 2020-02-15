@@ -1,0 +1,139 @@
+@font-face {
+    font-family: Droid-Sans;
+    src: url("../../common/fonts/Droid Sans Mono.ttf")
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0px;
+    height: 100%;
+}
+
+.hide {
+    display: none !important;
+}
+
+.titleBarContainer {
+    width: 100%;
+    height: 49px;
+    border-bottom: 1px solid #00000020;
+    -webkit-app-region: drag;
+}
+
+.title-logo {
+    width: 32px;
+    height: 32px;
+    margin: 9px;
+    -webkit-user-drag: none;
+}
+
+.title-span {
+    margin: 10px 0;
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: initial;
+    position: absolute;
+    cursor: default;
+    user-select: none;
+}
+
+.titleFunc {
+    -webkit-app-region: no-drag;
+    height: 49px;
+    width: 200px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    word-spacing: -5px;
+}
+
+.title-img {
+    width: 21px;
+    padding: 14px;
+    margin-left: 1px;
+    -webkit-user-drag: none;
+}
+
+.title-img:hover {
+    background-color: #d0d0d0;
+}
+
+#close:hover {
+    background-color: #ff5252;
+}
+
+.container {
+    width: 100%;
+    height: calc(100vh - 50px);
+}
+
+#Keyboard {
+    padding: 10px;
+}
+
+.Keyboard-Row {
+    display: table;
+    height: 75px;
+}
+
+.Key {
+    display: table-cell;
+    font-family: sans-serif;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    font-size: 14px;
+    font-weight: normal;
+    width: 75px;
+}
+
+.Empty-Key {
+    width: 35px;
+    border: 0px;
+}
+
+.Keyboard-Row:first-child .Key {
+    border-top: 1px solid #000;
+}
+
+.Keyboard-Row .Key:last-child {
+    border-right: 1px solid #000;
+}
+
+.Key-Symbol-top {
+    display: table;
+}
+
+.Key-Symbol-top-left {
+    display: table-cell;
+    font-size: 24px;
+    font-weight: bolder;
+    padding-left: 5px;
+    width: 30px;
+}
+
+.Key-Symbol-top-right {
+    display: table-cell;
+    font-size: 16px;
+    font-weight: bolder;
+    text-align: right;
+    padding-right: 5px;
+    width: 45px;
+}
+
+.Key-Symbol-center {
+    padding-right: 5px;
+    text-align: right;
+}
+
+.Key-Symbol-bottom {
+    padding-right: 5px;
+    text-align: right;
+}
+
+.Key.hover {
+    background: #79bbff;
+    color: #FFF;
+}
