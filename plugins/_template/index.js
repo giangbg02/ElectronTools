@@ -2,6 +2,8 @@ const {remote, ipcRenderer} = require('electron')
 
 const config = require('../../common/js/config').file('plugins/_template');
 
+const $ = require('../../common/js/domUtils')
+
 /**
  * 标题栏按钮
  */
@@ -10,22 +12,22 @@ const config = require('../../common/js/config').file('plugins/_template');
 // document.getElementById("setting").onclick = toggleSetting
 
 //最小化
-ID("min").onclick = function() {
+$("min").click(_ => {
     remote.getCurrentWindow().minimize()
-}
+})
 //最大化
-ID("max").onclick = function() {
+$("max").click(_ => {
     max.classList.toggle("hide")
     resize.classList.toggle("hide")
     remote.getCurrentWindow().maximize()
-}
+})
 //取消最大化
-ID("resize").onclick = function() {
+$("resize").click(_ => {
     max.classList.toggle("hide")
     resize.classList.toggle("hide")
     remote.getCurrentWindow().unmaximize()
-}
+})
 //关闭
-ID("close").onclick = function() {
+$("close").click(_ => {
     remote.getCurrentWindow().hide()
-}
+})
