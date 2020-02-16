@@ -15,7 +15,7 @@ class domUtils {
         "change select submit keydown keypress keyup contextmenu input ended timeupdate" ).split( " " ).forEach((item, index) => {
             this[item] = callback => {
                 let event = "on" + item
-                callback ? this.node[event] = callback : this.node[event]()
+                callback ? this.node[event] = callback : this.node[item]()
             }
         })
         return this;
