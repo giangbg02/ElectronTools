@@ -10,14 +10,14 @@ const mainWindow = {
     creat: function(){
         this.win = new BrowserWindow({
             width: 800, 
-            height: 600, 
+            height: 500, 
             frame: false,
             show: false,
-            // resizable: false,
-            // maximizable: false,
-            // minimizable: false,
-            // fullscreenable: false,
-            // closable: false,
+            resizable: false,
+            maximizable: false,
+            minimizable: false,
+            fullscreenable: false,
+            closable: false,
             // skipTaskbar: true,
             // transparent: true,
             webPreferences: {
