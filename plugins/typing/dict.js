@@ -11,7 +11,7 @@
  *
  */
 
-module.exports = {
+var dict = {
   '': {
     a: '啊', ai: '爱', an: '安', ang: '昂', ao: '奥',
     e: '鹅', ei: ['诶'], en: '嗯',
@@ -178,3 +178,8 @@ module.exports = {
     u: '主', ua: '爪', uai: '拽', uan: '专', uang: '装', ui: '追', un: '准', uo: '捉'
   }
 }
+
+Object.entries(dict).forEach(([sheng, yunList]) => dict[sheng].list = Object.keys(yunList))
+dict.list = Object.keys(dict)
+
+module.exports = dict
