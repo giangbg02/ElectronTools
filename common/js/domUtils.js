@@ -288,4 +288,10 @@ $.keyCode = {
     "'\""           : 222
 }
 
+window.onkeydown = function(e) {
+    if(e.keyCode == $.keyCode.r_R && e.ctrlKey) {
+        return false
+    }
+}
+
 module.exports = $
