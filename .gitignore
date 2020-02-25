@@ -108,3 +108,4 @@ build
 
 # yarn lock
 yarn.lock
+*.code-workspace
