@@ -7,6 +7,11 @@ function $(id) {
     return new domUtils(node)
 }
 
+//创建node
+$.creat = function(nodeName) {
+    return $(document.createElement(nodeName))
+}
+
 class domUtils {
     constructor(node) {
         this.node = node;
