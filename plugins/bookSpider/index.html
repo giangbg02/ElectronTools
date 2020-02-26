@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>template</title>
+  <link rel="stylesheet" href="./index.css" type="text/css">
+</head>
+
+<body>
+  <div class="titleBarContainer">
+    <div class="searchBar">
+      <input type="text" class="searchBookName" id="searchName">
+      <button class="searchBookButton" id="searchButton"><span>查询</span></button>
+    </div>
+    <div class="titleFunc">
+      <img class="title-img" id="setting" title="设置" src="../../common/img/setting.png">
+      <img class="title-img" id="min" title="最小化" src="../../common/img/min.png">
+      <img class="title-img" id="max" title="最大化" src="../../common/img/max.png">
+      <img class="title-img hide" id="resize" title="还原" src="../../common/img/resize.png">
+      <img class="title-img" id="close" title="关闭" src="../../common/img/close.png">
+    </div>
+  </div>
+  <div class="container">
+    <div class="bookSearchContainer">
+      <div class="bookSearchResult">
+        <div class="ulList resultSourceList">
+          <p>书源列表</p>
+          <ul id="resultSourceUl"></ul>
+        </div>
+        <div class="ulList resultBookList">
+          <p>搜索结果</p>
+          <ul id="resultBookUl"></ul>
+        </div>
+      </div>
+      <div class="bookChapterResult" id="bookChapterResult">
+        <div class="ulList bookReplaceList">
+          <p>文本替换</p>
+          <ul id="bookReplaceUl"></ul>
+        </div>
+        <div class="ulList bookChapterList">
+          <p>章节列表</p>
+          <ul id="bookChapterUl"></ul>
+        </div>
+      </div>
+    </div>
+    <div class="bookPreviewContainer" id="bookPreviewContainer">
+123
+    </div>
+  </div>
+  <script>
+    require('./index.js')
+  </script>
+</body>
+
+</html>
